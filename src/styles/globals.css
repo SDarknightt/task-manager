@@ -74,3 +74,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  max-width: 100%;
+  width: 100vw;
+  height: max-content;
+}
