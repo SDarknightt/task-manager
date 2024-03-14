@@ -1,5 +1,6 @@
 import {signIn, signOut, useSession} from "next-auth/react";
 import {api} from "~/utils/api";
+import * as React from "react"
 import {Button} from "~/components/ui/button";
 
 export default function Home() {
@@ -11,7 +12,6 @@ export default function Home() {
     );
     return (
         <div>
-            <h1>Home</h1>
             <div className="flex flex-col items-center justify-center gap-4">
                 <p className="text-center text-2xl text-black">
                     {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
