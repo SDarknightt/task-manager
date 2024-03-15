@@ -2,6 +2,16 @@ import {signIn, signOut, useSession} from "next-auth/react";
 import {api} from "~/utils/api";
 import * as React from "react"
 import {Button} from "~/components/ui/button";
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandSeparator
+} from "~/components/ui/command";
+import {Calculator, Calendar, CreditCard, Settings, Smile, User} from "lucide-react";
 
 export default function Home() {
     const { data: sessionData } = useSession();
@@ -30,7 +40,6 @@ export default function Home() {
                         >
                             {sessionData ? "Sign out" : "Sign in"}
                         </Button>
-
 
                         <div>
                         </div>
