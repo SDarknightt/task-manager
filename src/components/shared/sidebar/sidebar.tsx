@@ -29,7 +29,7 @@ const sidebarItems: SidebarItems = {
             label: 'Tarefas',
         },
         {
-            href: '/communities',
+            href: '/comunity',
             icon: Users,
             label: 'Comunidade',
         },
