@@ -53,6 +53,14 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -62,12 +70,39 @@ model User {
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
+  kanbanboards  UserKanbanboard[]
+  tasks         Task[]
+  disabled      Boolean   @default(false)
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+//table to save the relation between users and kanbanboards
+model UserKanbanboard {
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  kanbanboardId String
+  kanbanboard Kanbanboard @relation(fields: [kanbanboardId], references: [id])
+  admin Boolean @default(false)
 
-  @@unique([identifier, token])
+  @@id([userId, kanbanboardId])
+}
+
+model Kanbanboard {
+  id String @id @default(cuid())
+  name String
+  description String?
+  creationDate DateTime @default(now())
+  disabled Boolean @default(false)
+  users UserKanbanboard[]
+}
+
+model Task {
+  id String @id @default(cuid())
+  name String
+  description String?
+  creationDate DateTime @default(now())
+  estimatedDate DateTime?
+  endDate DateTime?
+  responsibleId String?
+  disabled Boolean @default(false)
+  responsible User? @relation(fields: [responsibleId], references: [id])
 }
