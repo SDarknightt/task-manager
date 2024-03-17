@@ -65,44 +65,47 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  emailVerified DateTime?
+  emailVerified DateTime? @map("email_verified")
   image         String?
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
-  kanbanboards  UserKanbanboard[]
+  boards        UserBoard[]
   tasks         Task[]
   disabled      Boolean   @default(false)
 }
 
-//table to save the relation between users and kanbanboards
-model UserKanbanboard {
-  userId String
+//table to save the relation between users and boards
+model UserBoard {
+  userId String @map("user_id")
   user User @relation(fields: [userId], references: [id])
-  kanbanboardId String
-  kanbanboard Kanbanboard @relation(fields: [kanbanboardId], references: [id])
+  boardId String @map("board_id")
+  board Board @relation(fields: [boardId], references: [id])
   admin Boolean @default(false)
 
-  @@id([userId, kanbanboardId])
+  @@id([userId, boardId])
 }
 
-model Kanbanboard {
+model Board {
   id String @id @default(cuid())
-  name String
+  title String
   description String?
-  creationDate DateTime @default(now())
+  creationDate DateTime @default(now()) @map("creation_date")
   disabled Boolean @default(false)
-  users UserKanbanboard[]
+  users UserBoard[]
+  tasks Task[]
 }
 
 model Task {
   id String @id @default(cuid())
-  name String
+  boardId String @map("board_id")
+  title String
   description String?
-  creationDate DateTime @default(now())
-  estimatedDate DateTime?
-  endDate DateTime?
-  responsibleId String?
+  creationDate DateTime @default(now()) @map("creation_date")
+  estimatedDate DateTime? @map("estimated_date")
+  endDate DateTime?  @map("end_date")
+  responsibleId String? @map("responsible_id")
   disabled Boolean @default(false)
   responsible User? @relation(fields: [responsibleId], references: [id])
+  board Board @relation(fields: [boardId], references: [id])
 }
