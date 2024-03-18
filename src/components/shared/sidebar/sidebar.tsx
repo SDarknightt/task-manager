@@ -19,9 +19,9 @@ const sidebarItems: SidebarItems = {
     links: [
         { label: 'Home', href: '/', icon: Home },
         {
-            href: '/local',
+            href: '/boards',
             icon: MapPin,
-            label: 'Locais',
+            label: 'Quadros',
         },
         {
             href: '/tasks',

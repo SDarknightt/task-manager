@@ -9,3 +9,34 @@ export interface SidebarItems {
     }>;
     extras?: ReactNode;
 }
+
+export type User = {
+    id: string;
+    name: string;
+    email: string;
+    disabled: boolean;
+    tasks?: Task[];
+    boards?: Board[];
+}
+
+export type Board ={
+    id: string;
+    title: string;
+    description: string;
+    creationDate: Date;
+    disabled: boolean;
+    tasks?: Task[];
+    users: User[];
+}
+
+export type Task = {
+    id: string;
+    title: string;
+    description: string;
+    creationDate: Date;
+    estimatedDate: Date;
+    endDate: Date;
+    disabled: boolean;
+    board: Board;
+    responsible?: User;
+}

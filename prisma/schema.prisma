@@ -90,7 +90,7 @@ model Board {
   id String @id @default(cuid())
   title String
   description String?
-  creationDate DateTime @default(now()) @map("creation_date")
+  creationDate DateTime @default(now()) @map("creation_date") @db.Timestamp(6)
   disabled Boolean @default(false)
   users UserBoard[]
   tasks Task[]
@@ -101,9 +101,9 @@ model Task {
   boardId String @map("board_id")
   title String
   description String?
-  creationDate DateTime @default(now()) @map("creation_date")
-  estimatedDate DateTime? @map("estimated_date")
-  endDate DateTime?  @map("end_date")
+  creationDate DateTime @default(now()) @map("creation_date") @db.Timestamp(6)
+  estimatedDate DateTime? @map("estimated_date") @db.Timestamp(6)
+  endDate DateTime?  @map("end_date") @db.Timestamp(6)
   responsibleId String? @map("responsible_id")
   disabled Boolean @default(false)
   responsible User? @relation(fields: [responsibleId], references: [id])

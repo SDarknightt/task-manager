@@ -2,8 +2,9 @@ import {signIn, signOut, useSession} from "next-auth/react";
 import {api} from "~/utils/api";
 import * as React from "react"
 import {Button} from "~/components/ui/button";
+import DialogCreateBoard from "~/pages/boards/dialog-create-board";
 
-export default function Local() {
+export default function Boards() {
     const { data: sessionData } = useSession();
 
     const { data: secretMessage } = api.post.getSecretMessage.useQuery(
@@ -14,8 +15,8 @@ export default function Local() {
     <div>
         <h2 className="text-lg font-bold m-5 ">Locais</h2>
         <div className="  md:w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2 md:p-14 ">
-            <div className="w-screen md:w-full -ml-5 md:ml-0 flex justify-around select-none">
-            <h3 className="font-bold">Testando</h3>
+            <div className="w-screen md:w-full -ml-5 md:ml-0 flex justify-end select-none">
+                <DialogCreateBoard/>
             </div>
             <div className="w-screen md:w-full md:overflow-hidden justify-center border rounded-sm">
                 <div className="border-slate-900">
