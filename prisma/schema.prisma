@@ -63,6 +63,7 @@ model VerificationToken {
 
 model User {
   id            String    @id @default(cuid())
+  shareId       Int?      @unique @map("share_id")
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
@@ -99,6 +100,7 @@ model Board {
 model Task {
   id String @id @default(cuid())
   boardId String @map("board_id")
+  status String @default("TODO")
   title String
   description String?
   creationDate DateTime @default(now()) @map("creation_date") @db.Timestamp(6)
