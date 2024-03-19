@@ -1,18 +1,7 @@
-import { Moon, Settings, Sun, User2} from "lucide-react";
-
-import {signOut, useSession} from "next-auth/react";
-import {FaSignOutAlt} from "react-icons/fa";
+import { Moon, Sun } from "lucide-react";
 import {useEffect, useState} from "react";
 import {useTheme} from "next-themes";
-import {
-    Menubar,
-    MenubarContent, MenubarItem,
-    MenubarLabel,
-    MenubarMenu,
-    MenubarSeparator,
-    MenubarTrigger
-} from "~/components/ui/menubar";
-
+import { Menubar } from "~/components/ui/menubar";
 
 export default function HeaderComponent () {
     const { theme, setTheme } = useTheme();
