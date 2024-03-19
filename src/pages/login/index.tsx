@@ -1,54 +1,14 @@
-import {getCsrfToken, signIn, signOut, useSession} from "next-auth/react";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import {useEffect, useState} from "react";
-import { useRouter } from "next/router";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "~/components/ui/card";
-import {Button} from "~/components/ui/button";
-import {FaDiscord} from "react-icons/fa";
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "~/components/ui/carousel";
+import { signIn, useSession } from "next-auth/react";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card";
+import { Button } from "~/components/ui/button";
+import { FaDiscord } from "react-icons/fa";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
 
-export default function AuthHandler({children}: any, {csrfToken}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function AuthHandler(props: {children: React.ReactNode}) {
     const session = useSession();
-    const router = useRouter();
-    const [shouldLogout, setShouldLogout] = useState(false);
-    const [counter, setCounter] = useState(5);
-
-    //removido para o login discord ser direcionado pela pagina de login da aplicação
-    // useEffect(() => {
-    //     if (session.status === 'unauthenticated') {
-    //         const handleSignIn = async () => {
-    //             try {
-    //                 const response = await signIn("discord");
-    //                 if (response?.ok) {
-    //                     void router.push("/home");
-    //                 }
-    //             } catch (error) {
-    //                 console.error(error);
-    //             }
-    //         };
-    //
-    //         void handleSignIn();
-    //     }
-    // }, [session, router]);
-
-    useEffect(() => {
-        if (session.status === 'authenticated') {
-            const intervalId = setInterval(() => {
-                setCounter(prevCounter => prevCounter - 1);
-            }, 1000);
-
-            return () => clearInterval(intervalId);
-        }
-    }, [session]);
-
-    useEffect(() => {
-        if (counter === 0) {
-            setShouldLogout(true);
-        }
-    }, [counter]);
 
     if (session.status === 'authenticated') {
-            return children;
+            return props.children as React.ReactNode;
     }
 
     if (session.status === 'loading') {
@@ -60,19 +20,11 @@ export default function AuthHandler({children}: any, {csrfToken}: InferGetServer
             </div>
         );
     }
+
     return (
         SignInPage()
     );
 }
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    return {
-        props: {
-            csrfToken: await getCsrfToken(context),
-        },
-    }
-}
-
-
 
 export function SignInPage(){
     return (
