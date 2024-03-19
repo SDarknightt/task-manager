@@ -31,6 +31,7 @@
     "add": "^2.0.6",
     "avatar": "^0.1.0",
     "calendar": "^0.1.1",
+    "card": "^2.5.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",

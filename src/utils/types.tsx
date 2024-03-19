@@ -22,7 +22,7 @@ export type User = {
 export type Board ={
     id: string;
     title: string;
-    description: string;
+    description?: string;
     creationDate: Date;
     disabled: boolean;
     tasks?: Task[];
