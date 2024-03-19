@@ -1,6 +1,6 @@
 'use client'
 import {z} from "zod";
-import {useForm, UseFormReturn} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
     Dialog,
@@ -15,6 +15,7 @@ import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, Form
 import {Input} from "~/components/ui/input";
 import * as React from "react";
 import {api} from "~/utils/api";
+import {toast} from "~/components/ui/use-toast";
 
 type FormValues = {
     title: string;
@@ -25,8 +26,8 @@ export default function DialogCreateBoard() {
 
     const apiMutation = api.board.createBoard.useMutation();
     const formSchema = z.object({
-        title: z.string().min(4, {message: 'Título deve ter no mínimo 4 caracteres'}),
-        description: z.string().optional(),
+        title: z.string().min(4, {message: 'Título deve ter no mínimo 4 caracteres.'}),
+        description: z.string().max(255,"Descrição pode ter no máximo 255 letras.").optional()
     })
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
@@ -42,6 +43,17 @@ export default function DialogCreateBoard() {
                 title: data.title,
                 description: data.description,
             });
+            if(createBoard){
+                toast({
+                    title: "Sucesso!",
+                    description: "Quadro criado com sucesso.",
+                })
+            } else{
+                toast({
+                    title: "Erro!",
+                    description: "Erro ao criar quadro.",
+                })
+            }
             form.reset();
         } catch (error) {
             console.error(error, 'Error creating board');
@@ -50,13 +62,13 @@ export default function DialogCreateBoard() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="outline">Criar Quadro</Button>
+                <Button variant="default">Criar Quadro</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogTitle>Criar Quadro</DialogTitle>
                     <DialogDescription>
-                        Make changes to your profile here. Click save when you&apos;re done.
+                       Crie um novo quadro.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
@@ -93,7 +105,7 @@ export default function DialogCreateBoard() {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit">Criar</Button>
                     </form>
                 </Form>
             </DialogContent>

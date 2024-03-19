@@ -1,13 +1,10 @@
 'use client';
 
 import {
-    Bell,
     Bookmark,
     Home,
-    List,
-    Mail, MapPin,
+    MapPin,
     MoreHorizontal, Plus,
-    User,
     Users,
 } from 'lucide-react';
 import { SidebarDesktop } from './sidebar-desktop';

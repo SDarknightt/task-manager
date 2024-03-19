@@ -11,7 +11,7 @@ export interface SidebarItems {
 }
 
 export type User = {
-    id: string;
+    id?: string;
     name: string;
     email: string;
     disabled: boolean;
