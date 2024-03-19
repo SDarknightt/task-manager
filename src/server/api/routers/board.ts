@@ -4,7 +4,7 @@ import {
     createTRPCRouter,
     protectedProcedure,
 } from "~/server/api/trpc";
-import {Board} from "~/utils/types";
+import {Board, User} from "~/utils/types";
 
 export const boardRouter = createTRPCRouter({
     createBoard: protectedProcedure
@@ -33,9 +33,9 @@ export const boardRouter = createTRPCRouter({
         }),
 
     getBoards: protectedProcedure
-        .query(({ctx}) => {
+        .query(async ({ctx}) => {
             try{
-                return ctx.db.board.findMany({
+                const responseBoard = await ctx.db.board.findMany({
                     where: {
                         users: {
                             some: {
@@ -44,6 +44,7 @@ export const boardRouter = createTRPCRouter({
                         },
                     },
                 });
+                return responseBoard as  Board[];
             }catch (e) {
                 throw new Error('Error getting boards');
             }
@@ -66,9 +67,66 @@ export const boardRouter = createTRPCRouter({
                         description: input.description,
                     },
                 });
-                return updatedBoard;
+                return updatedBoard as Board;
             }catch (error) {
                 throw new Error('Error updating board');
             }
         }),
+
+    getBoardDetails: protectedProcedure
+        .input(z.object({boardId: z.string()}))
+        .query(async ({input, ctx}) => {
+            try{
+                const board = await ctx.db.board.findUnique({
+                    where: {
+                        id: input.boardId,
+                    },
+                });
+                return board as Board;
+            } catch (error) {
+                throw new Error('Error getting board details');
+            }
+        }),
+
+    addUserToBoard: protectedProcedure
+        .input(z.object({boardId: z.string(), shareId: z.number()}))
+        .mutation(async({ctx, input}) => {
+            try{
+                // Check if user exists
+                const user = await ctx.db.user.findUnique({
+                    where: {
+                        shareId: input.shareId,
+                    },
+                });
+
+                // Check if user is already on board
+                const board = await ctx.db.board.findUnique({
+                    where: {
+                        id: input.boardId,
+                    },
+                    select: {
+                        users: {
+                            where: {
+                                userId: user?.id,
+                            },
+                        },
+                    },
+                });
+
+                if(board?.users.length === 0 && user) {
+                    const response = await ctx.db.userBoard.create({
+                        data: {
+                            userId: user?.id,
+                            boardId: input.boardId,
+                        },
+                    });
+                    if(response) {
+                        return user as User;
+                    }
+                }
+
+            }catch (error) {
+                throw new Error('Error adding user to board api.');
+            }
+        })
 });
