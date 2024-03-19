@@ -8,6 +8,7 @@ import AuthHandler from "~/pages/login";
 import HeaderComponent from "~/components/shared/header/header";
 import {ThemeProvider} from "~/components/theme-provider";
 import Sidebar from "~/components/shared/sidebar/sidebar";
+import {Toaster} from "~/components/ui/toaster";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -29,6 +30,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                           <Sidebar/>
                           <div className="content-container bg-background text-foreground">
                               <Component { ...pageProps}/>
+                              <Toaster/>
                           </div>
                       </div>
                   </main>
