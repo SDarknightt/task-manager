@@ -4,12 +4,14 @@ import Loading from "~/components/shared/loading/loading";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
 import {useEffect, useState} from "react";
 import {Board} from "~/utils/types";
-import {redirect} from "next/navigation";
+import {useRouter} from "next/router";
+import {Separator} from "~/components/ui/separator";
 
 export default function Home() {
     const [boards, setBoards] = useState([] as Board[]);
     const [isLoading, setIsLoading] = useState(true);
     const apiContext = api.useContext();
+    const router = useRouter();
 
     const fetchBoard = async () => {
         try {
@@ -34,6 +36,11 @@ export default function Home() {
             clearInterval(pooling);
         }
     }, []);
+
+    function redirectBoard(boardId: string) {
+        void router.push(`/boards/${boardId}`);
+    }
+
     return isLoading ?
         <Loading/> :
         <div>
@@ -45,10 +52,11 @@ export default function Home() {
                 <div
                     className="pl-20 pt-16 flex flex-column md:flex-row flex-wrap justify-start items-start gap-8 border rounded-sm flex-grow p-10 m-3 overflow-auto w-full">
                     {boards.map((board) => (
-                        <Card key={board?.id} className="min-w-[300px] max-w-[300px] max-h-[300px] min-h-[300px] flex-shrink-0 border-accent-foreground"
-                              onClick={() => redirect(board?.id)}>
+                        <Card key={board.id} className="min-w-[300px] max-w-[300px] max-h-[300px] min-h-[300px] flex-shrink-0 border-accent-foreground"
+                              onClick={() => redirectBoard(board.id)}>
                             <CardHeader>
                                 <CardTitle>{board?.title}</CardTitle>
+                                <Separator/>
                                 <CardDescription>{board?.description}</CardDescription>
                             </CardHeader>
                             <CardContent>

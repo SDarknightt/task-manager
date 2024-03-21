@@ -23,13 +23,13 @@ const sidebarItems: SidebarItems = {
         {
             href: '/tasks',
             icon: Bookmark,
-            label: 'Tarefas',
+            label: 'Minhas Tarefas',
         },
-        {
-            href: '/comunity',
-            icon: Users,
-            label: 'Comunidade',
-        },
+        // {
+        //     href: '/comunity',
+        //     icon: Users,
+        //     label: 'Comunidade',
+        // },
     ],
     extras: (
         <div className='flex flex-col gap-2'>

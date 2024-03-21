@@ -1,4 +1,4 @@
-import { z } from "zod";
+import {string, z} from "zod";
 
 import {
     createTRPCRouter,
@@ -22,4 +22,24 @@ export const userRouter = createTRPCRouter({
                 throw new Error('Error generating share id');
             }
         }),
+
+    getUsersBoard: protectedProcedure
+        .input(z.object({boardId: z.string()}))
+        .query(async ({input, ctx}) => {
+            try{
+                const users = await ctx.db.user.findMany({
+                    where: {
+                        boards: {
+                            some: {
+                                boardId: input.boardId
+                            }
+                        }
+                    },
+                });
+                return users;
+            }catch (error) {
+                throw new Error('Error getting users');
+            }
+        }),
+
 });

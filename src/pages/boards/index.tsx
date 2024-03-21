@@ -49,7 +49,8 @@ export default function Boards() {
                 <div
                     className="pl-20 pt-16 flex flex-column md:flex-row flex-wrap justify-start items-start gap-8 border rounded-sm flex-grow p-10 m-3 overflow-auto w-full">
                     {boards.map((board) => (
-                        <Card key={board?.id} className="min-w-[300px] max-w-[300px] max-h-[300px] min-h-[300px] flex-shrink-0 border-accent-foreground"
+                        <Card key={board?.id}
+                              className="min-w-[300px] max-w-[300px] max-h-[300px] min-h-[300px] flex-shrink-0 border-accent-foreground"
                               onClick={() => redirect(board?.id)}>
                             <CardHeader>
                                 <CardTitle>{board?.title}</CardTitle>
@@ -64,6 +65,6 @@ export default function Boards() {
         </div>
 }
 
-function redirect(boardId: string) {
+export function redirect(boardId: string) {
     void router.push(`/boards/` + encodeURIComponent(boardId));
 }

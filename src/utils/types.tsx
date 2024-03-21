@@ -11,12 +11,12 @@ export interface SidebarItems {
 }
 
 export type User = {
-    id?: string;
-    name: string;
-    email: string;
-    disabled: boolean;
-    tasks?: Task[];
-    boards?: Board[];
+    id: string;
+    name: string | null;
+    email: string | null;
+    disabled: boolean | null;
+    tasks?: Task[] | null;
+    boards?: Board[] | null;
 }
 
 export type Board ={
@@ -31,12 +31,15 @@ export type Board ={
 
 export type Task = {
     id: string;
+    boardId: string;
+    responsibleId?: string | null;
+    status: string;
     title: string;
-    description: string;
+    description: string | null;
     creationDate: Date;
-    estimatedDate: Date;
-    endDate: Date;
+    estimatedDate?: Date | null;
+    endDate: Date | null;
     disabled: boolean;
-    board: Board;
-    responsible?: User;
+    board?: Board;
+    responsible?: User | null;
 }
