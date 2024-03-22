@@ -133,4 +133,24 @@ export const taskRouter = createTRPCRouter({
             }
         }),
 
+    handleTaskStatus: protectedProcedure
+        .input(z.object({
+            id: z.string(),
+            status: z.string(),
+        }))
+        .mutation(async ({input, ctx}) => {
+            try{
+                const responseTask = await ctx.db.task.update({
+                    where: {
+                        id: input.id,
+                    },
+                    data: {
+                        status: input.status,
+                    },
+                });
+                return responseTask as Task;
+            }catch (e) {
+                throw new Error('Error updating task status');
+            }
+        }),
 });

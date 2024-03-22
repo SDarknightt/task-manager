@@ -47,7 +47,7 @@ export default function MyTasks() {
                     <div className="w-screen md:w-full -ml-5 md:ml-0 flex justify-end select-none">
                     </div>
                     <div
-                        className="pl-20 pt-16 flex flex-column md:flex-row flex-wrap justify-start items-start gap-8 border rounded-sm flex-grow p-10 m-3 overflow-auto w-full">
+                        className="pl-20 min-h-[300px] pt-16 flex flex-column md:flex-row flex-wrap justify-start items-start gap-8 border rounded-sm flex-grow p-10 m-3 overflow-auto w-full">
                         {tasks.map((task) => (
                             <Card key={task.id}
                                   className="min-w-[300px] max-w-[300px] max-h-[300px] min-h-[300px] flex-shrink-0 border-accent-foreground">

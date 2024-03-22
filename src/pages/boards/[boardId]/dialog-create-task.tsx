@@ -164,11 +164,10 @@ export default function DialogCreateTask({board} : {board: Board}) {
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
                                             <SelectTrigger>
-                                                <SelectValue defaultValue="" placeholder="Selecione um protocolo"/>
+                                                <SelectValue defaultValue="" placeholder="Selecione um responsável"/>
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent className="max-h-60 overflow-y-auto">
-
                                             {users?.map((user: User) => {
                                                 return (
                                                     <SelectItem value={user.id} key={user.id}>{user.name}</SelectItem>

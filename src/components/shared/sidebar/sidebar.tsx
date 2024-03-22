@@ -25,11 +25,11 @@ const sidebarItems: SidebarItems = {
             icon: Bookmark,
             label: 'Minhas Tarefas',
         },
-        // {
-        //     href: '/comunity',
-        //     icon: Users,
-        //     label: 'Comunidade',
-        // },
+        {
+            href: '/others',
+            icon: Users,
+            label: 'Kanban',
+        },
     ],
     extras: (
         <div className='flex flex-col gap-2'>
