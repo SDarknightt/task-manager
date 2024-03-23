@@ -4,8 +4,8 @@ import {useEffect, useState} from "react";
 import {api} from "~/utils/api";
 import * as React from "react";
 import Loading from "~/components/shared/loading/loading";
-import {Kanban} from "~/components/kanban-board";
-import {HeaderPage} from "src/components/header-page";
+import {Kanban} from "src/components/shared/kanban-board";
+import {HeaderPage} from "src/components/shared/header-page";
 
 export default function MyTasks() {
     const router = useRouter();
@@ -43,11 +43,9 @@ export default function MyTasks() {
         <div>
             <h2 className="text-lg font-bold m-5 "><HeaderPage pageName={"Minhas Tarefas"}/></h2>
             <div
-                className="md:w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2 md:p-14 ">
+                className="w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2">
                 <div
-                    className="  md:w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2 md:p-14 ">
-                    <div className="w-screen md:w-full -ml-5 md:ml-0 flex justify-end select-none">
-                    </div>
+                    className="h-full flex flex-col md:justify-center align-middle items-center p-2">
                     <Kanban tasks={tasks} fetchTasks={fetchTasks}/>
                 </div>
             </div>

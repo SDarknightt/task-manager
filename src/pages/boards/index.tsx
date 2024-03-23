@@ -6,7 +6,7 @@ import {Board} from "~/utils/types";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
 import {router} from "next/client";
 import Loading from "~/components/shared/loading/loading";
-import {HeaderPage} from "~/components/header-page";
+import {HeaderPage} from "src/components/shared/header-page";
 
 
 export default function Boards() {

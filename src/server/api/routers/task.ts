@@ -55,21 +55,23 @@ export const taskRouter = createTRPCRouter({
 
     updateTask: protectedProcedure
         .input(z.object({
-            id: z.string(),
-            title: z.string().optional(),
+            taskId: z.string(),
+            title: z.string(),
             description: z.string().optional(),
             responsibleId: z.string().optional(),
+            estimatedDate: z.date().optional(),
         }))
         .mutation(async ({input, ctx}) => {
             try{
                 const responseTask = await ctx.db.task.update({
                     where: {
-                        id: input.id,
+                        id: input.taskId,
                     },
                     data: {
                         title: input.title,
                         description: input.description,
                         responsibleId: input.responsibleId,
+                        estimatedDate: input.estimatedDate,
                     },
                 });
                 return responseTask;

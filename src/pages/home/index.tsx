@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import {Board} from "~/utils/types";
 import {useRouter} from "next/router";
 import {Separator} from "~/components/ui/separator";
-import {HeaderPage} from "src/components/header-page";
+import {HeaderPage} from "src/components/shared/header-page";
 
 export default function Home() {
     const [boards, setBoards] = useState([] as Board[]);

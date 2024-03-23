@@ -1,17 +1,22 @@
-import {Task} from "~/utils/types";
+import {Task, User} from "~/utils/types";
 import {useEffect, useState} from "react";
 import {api} from "~/utils/api";
 import {Separator} from "~/components/ui/separator";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
-import { CheckCheck, Clock, RotateCw} from "lucide-react";
+import {CheckCheck, Clock, RotateCw} from "lucide-react";
 import * as React from "react";
+import {Avatar, AvatarImage} from "~/components/ui/avatar";
+import {DialogUpdateTask} from "~/pages/boards/[boardId]/dialog-update-task";
 
-export function Kanban ({tasks, fetchTasks}: {tasks: Task[], fetchTasks: () => void}){
+export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: () => void, users?: User[]}){
     const [taskToDo, setTaskToDo] = useState([] as Task[]);
     const [taskDoing, setTaskDoing] = useState([] as Task[]);
     const [taskDone, setTaskDone] = useState([] as Task[]);
     const useMutation = api.task.handleTaskStatus.useMutation();
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedTask, setSelectedTask] = useState<Task>({} as Task);
+
     async function updateTaskStatus(id: string, status: string) {
         await useMutation.mutateAsync({id: id, status: status});
         void fetchTasks;
@@ -36,7 +41,7 @@ export function Kanban ({tasks, fetchTasks}: {tasks: Task[], fetchTasks: () => v
                 </div>
                 {taskToDo.map((task) => (
                     <div key={task.id} className="relative">
-                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-red-500">
+                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-red-500" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}}>
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
                                 <Separator/>
@@ -61,7 +66,7 @@ export function Kanban ({tasks, fetchTasks}: {tasks: Task[], fetchTasks: () => v
                 </div>
                 {taskDoing.map((task) => (
                     <div key={task.id} className="relative">
-                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-yellow-500">
+                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-yellow-500" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}} >
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
                                 <Separator/>
@@ -86,13 +91,19 @@ export function Kanban ({tasks, fetchTasks}: {tasks: Task[], fetchTasks: () => v
                 </div>
                 {taskDone.map((task) => (
                     <div key={task.id} className="relative">
-                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-green-500">
+                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-green-500" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}}>
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
                                 <Separator/>
                                 <CardDescription>{task.description}</CardDescription>
                             </CardHeader>
                             <CardContent>
+                                {task?.responsible?.image ?
+                                    <Avatar className="w-[30px] h-[30px]">
+                                        <AvatarImage src={task?.responsible?.image}/>
+                                    </Avatar>
+                                    : <></>
+                                }
                             </CardContent>
                         </Card>
                         <div className="absolute bottom-4 left-2 right-2">
@@ -103,6 +114,7 @@ export function Kanban ({tasks, fetchTasks}: {tasks: Task[], fetchTasks: () => v
                     </div>
                 ))}
             </div>
+            {isDialogOpen && selectedTask && <DialogUpdateTask taskUpdate={selectedTask} users={users} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
         </div>
     )
 }
