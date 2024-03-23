@@ -27,7 +27,6 @@ export type Board ={
     creationDate: Date;
     disabled: boolean;
     tasks?: Task[];
-    users: User[];
 }
 
 export type Task = {

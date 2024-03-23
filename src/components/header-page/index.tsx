@@ -1,10 +1,37 @@
-import {Board} from "~/utils/types";
+import {Board, User} from "~/utils/types";
 import {Button} from "~/components/ui/button";
-import {EditIcon, PlusIcon} from "lucide-react";
+import {EditIcon} from "lucide-react";
 import {Avatar, AvatarImage} from "~/components/ui/avatar";
 import * as React from "react";
+import {useEffect, useState} from "react";
+import {api} from "~/utils/api";
+import DialogInsertUser from "~/pages/boards/[boardId]/dialog-insert-user";
 
 export function HeaderPage({board, pageName}: {board?: Board, pageName?: string}) {
+    const apiContext = api.useContext();
+    const [users, setUsers] = useState([] as User[]);
+
+    const fetchUsers = async () => {
+        if(board){
+            const response = await apiContext.board.getUsersOnBoard.fetch({boardId: board.id});
+            if(response){
+                setUsers(response);
+            }
+        }
+    }
+    useEffect(() => {
+        const pooling = setInterval(() => {
+            void fetchUsers();
+        }, 20000);
+        if(board){
+            void fetchUsers();
+        }
+
+        return () => {
+            clearInterval(pooling);
+        }
+    }, [board]);
+
     return (
         <div className="flex flex-initial justify-between">
             <div className="flex items-center">
@@ -16,19 +43,21 @@ export function HeaderPage({board, pageName}: {board?: Board, pageName?: string}
             </div>
 
             <ul className="flex space-x-3">
-                { board ? board?.users?.map((user) => (
-                    <li key={user.email} className="max-w-[36px] max-h-[36px]">
+                { users.length > 0 ? users.map((user) => (
+                    <li key={user?.id} className="max-w-[36px] max-h-[36px]">
                         <Avatar>
                             <AvatarImage className="rounded-[40px]" src={user?.image}/>
                         </Avatar>
                     </li>
                  )) : <></>
                 }
-                <li>
-                    <button className="border border-dashed flex items-center w-9 h-9 border-gray-500 justify-center rounded-full">
-                        <PlusIcon className="w-5 h-5 text-foreground"/>
-                    </button>
-                </li>
+
+                {board ?
+                    <li>
+                       <DialogInsertUser board={board}/>
+                    </li>
+                    : <></>
+                }
             </ul>
         </div>
     );

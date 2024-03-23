@@ -3,10 +3,10 @@ import {type Board, type Task} from "~/utils/types";
 import {useEffect, useState} from "react";
 import {api} from "~/utils/api";
 import * as React from "react";
-import DialogInsertUser from "~/pages/boards/[boardId]/dialog-insert-user";
 import Loading from "~/components/shared/loading/loading";
 import DialogCreateTask from "~/pages/boards/[boardId]/dialog-create-task";
-import {Kanban} from "~/pages/others";
+import {Kanban} from "~/components/kanban-board";
+import {HeaderPage} from "src/components/header-page";
 
 export default function BoardDetails() {
     const router = useRouter();
@@ -60,18 +60,17 @@ export default function BoardDetails() {
     return isLoading ?
         <Loading/> :
         <div>
-            <h2 className="text-lg font-bold m-5 ">{board?.title}</h2>
+            <h2 className="text-lg font-bold m-5 "><HeaderPage board={board}/></h2>
             <div
                 className="md:w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2 md:p-14 ">
-                <div className="w-screen md:w-full -ml-5 md:ml-0 flex justify-end select-none justify-between">
-                    <DialogInsertUser board={board}/>
+                <div className="w-screen md:w-full -ml-5 md:ml-0 flex select-none justify-between">
                     <DialogCreateTask board={board}/>
                 </div>
                 <div
                     className="  md:w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2 md:p-14 ">
                     <div className="w-screen md:w-full -ml-5 md:ml-0 flex justify-end select-none">
                     </div>
-                    <Kanban tasks={tasks}/>
+                    <Kanban tasks={tasks} fetchTasks={fetchTasks}/>
                 </div>
             </div>
         </div>

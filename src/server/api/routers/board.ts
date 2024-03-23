@@ -88,6 +88,29 @@ export const boardRouter = createTRPCRouter({
             }
         }),
 
+    getUsersOnBoard: protectedProcedure
+        .input(z.object({boardId: z.string()}))
+        .query(async ({input, ctx}) => {
+            try{
+                const board = await ctx.db.board.findUnique({
+                    where: {
+                        id: input.boardId,
+                    },
+                    select: {
+                        users: {
+                            include: {
+                                user: true,
+                            },
+                        },
+                    },
+                });
+                return board?.users.map((user) => user.user) as User[];
+            }catch (error) {
+                throw new Error('Error getting users on board');
+            }
+        }),
+
+
     addUserToBoard: protectedProcedure
         .input(z.object({boardId: z.string(), shareId: z.number()}))
         .mutation(async({ctx, input}) => {

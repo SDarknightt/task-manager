@@ -4,8 +4,8 @@ import {
     Bookmark,
     Home,
     MapPin,
-    MoreHorizontal, Plus,
-    Users,
+    MoreHorizontal,
+    Plus,
 } from 'lucide-react';
 import { SidebarDesktop } from './sidebar-desktop';
 import { SidebarButton } from './sidebar-button';
@@ -24,11 +24,6 @@ const sidebarItems: SidebarItems = {
             href: '/tasks',
             icon: Bookmark,
             label: 'Minhas Tarefas',
-        },
-        {
-            href: '/others',
-            icon: Users,
-            label: 'Kanban',
         },
     ],
     extras: (

@@ -17,13 +17,14 @@ import {api} from "~/utils/api";
 import {InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot} from "~/components/ui/input-otp";
 import {toast} from "~/components/ui/use-toast";
 import {Board} from "~/utils/types";
+import {PlusIcon} from "lucide-react";
 
 export default function DialogInsertUser({board} : {board: Board}) {
 
     return (
         <Dialog>
-            <DialogTrigger asChild>
-                <Button variant="default">Inserir Usúario</Button>
+            <DialogTrigger asChild  className="border border-dashed flex items-center w-9 h-9 border-gray-500 justify-center rounded-full">
+                <Button variant="ghost"><PlusIcon className="w-10 h-10 text-red-600"/>+</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
