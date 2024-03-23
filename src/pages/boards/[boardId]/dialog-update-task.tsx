@@ -54,7 +54,6 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose}: {taskUpda
 
     async function onSubmit(data: FormValues) {
         try {
-            console.log("DATA", data);
             if(!data.responsibleId){
                 data.responsibleId = undefined;
             }
@@ -67,6 +66,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose}: {taskUpda
             });
             form.reset();
             if (updateTask) {
+                onClose();
                 toast({
                     title: "Sucesso!",
                     description: "Tarefa atualizada com sucesso.",

@@ -36,10 +36,12 @@ export function HeaderPage({board, pageName}: {board?: Board, pageName?: string}
         <div className="flex flex-initial justify-between">
             <div className="flex items-center">
                 {board ?
-                    <h4 className="text-4xl font-bold text-foreground">{board?.title}</h4>
+                    <>
+                        <h4 className="text-4xl font-bold text-foreground">{board?.title}</h4>
+                        <Button variant={"ghost"}><EditIcon className="w-8 h-8 text-foreground shadow-xl"/></Button>
+                    </>
                     : <h4 className="text-4xl font-bold text-foreground">{pageName}</h4>
                 }
-                <Button variant={"ghost"}><EditIcon className="w-8 h-8 text-foreground shadow-xl"/></Button>
             </div>
 
             <ul className="flex space-x-3">
