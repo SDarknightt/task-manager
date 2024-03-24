@@ -52,15 +52,15 @@ export const boardRouter = createTRPCRouter({
 
     updateBoard: protectedProcedure
         .input(z.object({
-            id: z.string(),
-            title: z.string().optional(),
+            boardId: z.string(),
+            title: z.string(),
             description: z.string().optional(),
         }))
         .mutation(async ({input, ctx}) => {
             try{
                 const updatedBoard = await ctx.db.board.update({
                     where: {
-                        id: input.id,
+                        id: input.boardId,
                     },
                     data: {
                         title: input.title,

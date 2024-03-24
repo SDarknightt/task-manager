@@ -6,10 +6,12 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {api} from "~/utils/api";
 import DialogInsertUser from "~/pages/boards/[boardId]/dialog-insert-user";
+import {DialogUpdateBoard} from "~/pages/boards/dialog-update-board";
 
-export function HeaderPage({board, pageName}: {board?: Board, pageName?: string}) {
+export function HeaderPage({board, pageName, refetchBoard}: {board?: Board, pageName?: string, refetchBoard?: () => void}){
     const apiContext = api.useContext();
     const [users, setUsers] = useState([] as User[]);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const fetchUsers = async () => {
         if(board){
@@ -19,6 +21,7 @@ export function HeaderPage({board, pageName}: {board?: Board, pageName?: string}
             }
         }
     }
+
     useEffect(() => {
         const pooling = setInterval(() => {
             void fetchUsers();
@@ -38,7 +41,7 @@ export function HeaderPage({board, pageName}: {board?: Board, pageName?: string}
                 {board ?
                     <>
                         <h4 className="text-4xl font-bold text-foreground">{board?.title}</h4>
-                        <Button variant={"ghost"}><EditIcon className="w-8 h-8 text-foreground shadow-xl"/></Button>
+                        <Button variant={"ghost"} onClick={()=> setIsDialogOpen(true)}><EditIcon className="w-8 h-8 text-foreground shadow-xl"/></Button>
                     </>
                     : <h4 className="text-4xl font-bold text-foreground">{pageName}</h4>
                 }
@@ -61,6 +64,7 @@ export function HeaderPage({board, pageName}: {board?: Board, pageName?: string}
                     : <></>
                 }
             </ul>
+            {isDialogOpen && <DialogUpdateBoard refetchBoard={refetchBoard} board={board} users={users} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
         </div>
     );
 }

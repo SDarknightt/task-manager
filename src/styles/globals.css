@@ -7,7 +7,7 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
+    --card: 192, 15%, 94%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
@@ -21,7 +21,7 @@
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
+    --border: 204, 8%, 76%;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
     --radius: 1rem;

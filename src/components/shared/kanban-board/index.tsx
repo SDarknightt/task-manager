@@ -44,7 +44,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                         <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-red-500" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}}>
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
-                                <Separator/>
+                                <Separator className="bg-red-500"/>
                                 <CardDescription>{task.description}</CardDescription>
                             </CardHeader>
                             <CardContent>
@@ -69,7 +69,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                         <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-yellow-500" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}} >
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
-                                <Separator/>
+                                <Separator className="bg-yellow-500"/>
                                 <CardDescription>{task.description}</CardDescription>
                             </CardHeader>
                             <CardContent>
@@ -94,7 +94,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                         <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-green-500" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}}>
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
-                                <Separator/>
+                                <Separator className="bg-green-500"/>
                                 <CardDescription>{task.description}</CardDescription>
                             </CardHeader>
                             <CardContent>

@@ -64,7 +64,6 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose}: {taskUpda
                 responsibleId: data.responsibleId,
                 estimatedDate: data.estimatedDate,
             });
-            form.reset();
             if (updateTask) {
                 onClose();
                 toast({

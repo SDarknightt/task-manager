@@ -73,7 +73,7 @@ export default function BoardDetails() {
     return isLoading ?
         <Loading/> :
         <div>
-            <h2 className="text-lg font-bold m-5 "><HeaderPage board={board}/></h2>
+            <h2 className="text-lg font-bold m-5 "><HeaderPage board={board} refetchBoard={fetchBoard}/></h2>
             <div
                 className="md:w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2 md:p-14 ">
                 <div className="w-screen md:w-full -ml-5 md:ml-0 flex select-none justify-between">
