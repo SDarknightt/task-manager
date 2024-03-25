@@ -1,4 +1,4 @@
-import {Board, User} from "~/utils/types";
+import {type Board, type User} from "~/utils/types";
 import {Button} from "~/components/ui/button";
 import {EditIcon} from "lucide-react";
 import {Avatar, AvatarImage} from "~/components/ui/avatar";
@@ -64,7 +64,7 @@ export function HeaderPage({board, pageName, refetchBoard}: {board?: Board, page
                     : <></>
                 }
             </ul>
-            {isDialogOpen && <DialogUpdateBoard refetchBoard={refetchBoard} board={board} users={users} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
+            {isDialogOpen && refetchBoard && board && <DialogUpdateBoard refetchBoard={refetchBoard} board={board} users={users} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
         </div>
     );
 }

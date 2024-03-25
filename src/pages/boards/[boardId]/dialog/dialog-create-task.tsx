@@ -30,6 +30,7 @@ import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {cn} from "~/lib/utils";
 import {CalendarIcon} from "lucide-react";
 import {Calendar} from "~/components/ui/calendar";
+import {Textarea} from "~/components/ui/text-area";
 
 type FormValues = {
     title: string;
@@ -142,7 +143,7 @@ export default function DialogCreateTask({board} : {board: Board}) {
                                 <FormItem>
                                     <FormLabel>Descrição</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Insira a descrição..." {...field} />
+                                        <Textarea className="text-foreground" placeholder={"Insira a descrição"} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         Descreva sobre o que se trata o tarefa.

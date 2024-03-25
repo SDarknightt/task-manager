@@ -107,7 +107,7 @@ export function AddUserInput({board}: {board: Board}) {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Inserir</Button>
+                <Button type="submit" className="w-full">Inserir</Button>
             </form>
         </Form>
     )

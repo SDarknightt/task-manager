@@ -2,7 +2,7 @@
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {signOut, useSession} from "next-auth/react";
 import {useEffect, useState} from "react";
-import {Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "~/components/ui/dialog";
+import {Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle} from "~/components/ui/dialog";
 import * as React from "react";
 import {Button} from "~/components/ui/button";
 import {
@@ -13,6 +13,8 @@ import {
     AlertDialogTrigger
 } from "~/components/ui/alert-dialog";
 import {api} from "~/utils/api";
+import {DialogBody} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
+import {LogOut} from "lucide-react";
 
 export default function UserItem(){
     const { data: sessionData } = useSession();
@@ -62,22 +64,22 @@ export function DialogUserItem({onClose}: DialogUserItemProps) {
                 <DialogClose className="absolute right-4 top-4" onClick={onClose} />
                 <DialogHeader>
                     <DialogTitle>Perfil</DialogTitle>
-                    <DialogDescription>
-                        <div className="flex flex-col items-center">
-                            <div className="justify-self-center">
-                                <Avatar>
-                                    <AvatarImage className="rounded-[40px] min-h-2 min-w-2 object-cover"
-                                                 src={sessionData?.user?.image}/>
-                                    <AvatarFallback>{sessionData?.user?.name?.charAt(0)}</AvatarFallback>
-                                </Avatar>
-                            </div>
-                            <h4 className="font-bold text-lg mt-5"> {sessionData?.user?.name}</h4>
-                            <h3 className="font-bold" >{sessionData?.user?.email}</h3>
-                            <DialogShareId/>
-                            <Button variant={"destructive"}  className="min-w-32" onClick={() => signOut()}>Sair</Button>
-                        </div>
-                    </DialogDescription>
                 </DialogHeader>
+                <DialogBody>
+                    <div className="flex flex-col items-center">
+                        <div className="justify-self-center">
+                            <Avatar className={"min-h-[80px] min-w-[80px]"}>
+                                <AvatarImage className="rounded-[40px] min-h-2 min-w-2 object-cover"
+                                             src={sessionData?.user?.image}/>
+                                <AvatarFallback>{sessionData?.user?.name?.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                        </div>
+                        <h4 className="font-bold text-lg mt-5"> {sessionData?.user?.name}</h4>
+                        <h3 className="font-bold">{sessionData?.user?.email}</h3>
+                        <DialogShareId/>
+                        <Button variant={"destructive"} className="min-w-32" onClick={() => signOut()}><LogOut className={"mr-2"}/>Sair</Button>
+                    </div>
+                </DialogBody>
             </DialogContent>
         </Dialog>
     )

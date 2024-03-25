@@ -1,4 +1,4 @@
-import {Board, User} from "~/utils/types";
+import {type Board, type User} from "~/utils/types";
 import {api} from "~/utils/api";
 import {z} from "zod";
 import {useForm} from "react-hook-form";
@@ -104,7 +104,7 @@ export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}:
                                 <FormItem>
                                     <FormLabel>Descrição</FormLabel>
                                     <FormControl>
-                                        <Textarea className="text-foreground" id="description" placeholder={"Insira a descrição"} {...field} />
+                                        <Textarea className="text-foreground" placeholder={"Insira a descrição"} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         Descreva sobre o que se trata quadro.
