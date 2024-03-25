@@ -15,6 +15,7 @@ import {Button} from "~/components/ui/button";
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import * as React from "react";
+import {Textarea} from "~/components/ui/text-area";
 
 type FormValues = {
     boardId: string;
@@ -103,7 +104,7 @@ export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}:
                                 <FormItem>
                                     <FormLabel>Descrição</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Insira a descrição..." {...field} />
+                                        <Textarea className="text-foreground" id="description" placeholder={"Insira a descrição"} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         Descreva sobre o que se trata quadro.

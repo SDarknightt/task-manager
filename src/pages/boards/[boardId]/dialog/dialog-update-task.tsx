@@ -21,6 +21,7 @@ import {format} from "date-fns";
 import {CalendarIcon} from "lucide-react";
 import {Calendar} from "~/components/ui/calendar";
 import * as React from "react";
+import {Textarea} from "~/components/ui/text-area";
 
 type FormValues = {
     taskId: string;
@@ -119,7 +120,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose}: {taskUpda
                                 <FormItem>
                                     <FormLabel>Descrição</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Insira a descrição..." {...field} />
+                                        <Textarea className="text-foreground" id="description" {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         Descreva sobre o que se trata o tarefa.

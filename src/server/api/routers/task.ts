@@ -36,12 +36,14 @@ export const taskRouter = createTRPCRouter({
     getTasks: protectedProcedure
         .input(z.object({
             boardId: z.string(),
+            disabled: z.boolean().optional().default(false)
         }))
         .query(async ({input, ctx}) => {
             try{
                 const responseTask = await ctx.db.task.findMany({
                     where: {
                         boardId: input.boardId,
+                        disabled: input.disabled
                     },
                     include:{
                        responsible: true
@@ -82,13 +84,13 @@ export const taskRouter = createTRPCRouter({
 
     deleteTask: protectedProcedure
         .input(z.object({
-            id: z.string(),
+            taskId: z.string(),
         }))
         .mutation(async ({input, ctx}) => {
             try{
                 const responseTask = await ctx.db.task.delete({
                     where: {
-                        id: input.id,
+                        id: input.taskId,
                     },
                 });
                 return responseTask;
@@ -99,13 +101,13 @@ export const taskRouter = createTRPCRouter({
 
     disableTask: protectedProcedure
         .input(z.object({
-            id: z.string(),
+            taskId: z.string(),
         }))
         .mutation(async ({input, ctx}) => {
             try{
                 const responseTask = await ctx.db.task.update({
                     where: {
-                        id: input.id,
+                        id: input.taskId,
                     },
                     data: {
                         disabled: true,
@@ -118,11 +120,12 @@ export const taskRouter = createTRPCRouter({
         }),
 
     getUserTasks: protectedProcedure
-        .query(async ({input, ctx}) => {
+        .query(async ({ ctx}) => {
             try{
                 const responseTask = await ctx.db.task.findMany({
                     where: {
                         responsibleId: ctx.session.user.id,
+                        disabled: false
                     },
                     include:{
                         responsible: true,

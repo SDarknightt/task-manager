@@ -2,11 +2,10 @@ import {api} from "~/utils/api";
 import * as React from "react"
 import DialogCreateBoard from "~/pages/boards/dialog-create-board";
 import {useEffect, useState} from "react";
-import {Board, Task} from "~/utils/types";
+import {Board} from "~/utils/types";
 import Loading from "~/components/shared/loading/loading";
 import {HeaderPage} from "src/components/shared/header-page";
 import MenuBoards from "~/components/shared/menu-boards";
-import {DialogUpdateTask} from "~/pages/boards/[boardId]/dialog-update-task";
 
 export default function Boards() {
     const [boards, setBoards] = useState([] as Board[]);

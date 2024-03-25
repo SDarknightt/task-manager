@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {api} from "~/utils/api";
 import * as React from "react";
 import Loading from "~/components/shared/loading/loading";
-import DialogCreateTask from "~/pages/boards/[boardId]/dialog-create-task";
+import DialogCreateTask from "~/pages/boards/[boardId]/dialog/dialog-create-task";
 import {Kanban} from "src/components/shared/kanban-board";
 import {HeaderPage} from "src/components/shared/header-page";
 

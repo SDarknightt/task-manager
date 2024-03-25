@@ -16,6 +16,7 @@ import {Input} from "~/components/ui/input";
 import * as React from "react";
 import {api} from "~/utils/api";
 import {toast} from "~/components/ui/use-toast";
+import {Textarea} from "~/components/ui/text-area";
 
 type FormValues = {
     title: string;
@@ -96,7 +97,7 @@ export default function DialogCreateBoard() {
                                 <FormItem>
                                     <FormLabel>Descrição</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Insira a descrição..." {...field} />
+                                        <Textarea className="text-foreground" id="description" placeholder={"Insira a descrição"} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         Descreva sobre o que se trata o quadro.
@@ -105,7 +106,7 @@ export default function DialogCreateBoard() {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit">Criar</Button>
+                        <Button type="submit" className={"w-full"}>Criar</Button>
                     </form>
                 </Form>
             </DialogContent>
