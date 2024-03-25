@@ -48,6 +48,17 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                                 <CardDescription>{task.description}</CardDescription>
                             </CardHeader>
                             <CardContent>
+                                {task?.responsible?.image ?
+                                    <div>
+                                        <span className="flex items-center">
+                                            <Avatar className="w-[30px] h-[30px]">
+                                                <AvatarImage src={task?.responsible?.image}/>
+                                            </Avatar>
+                                            <p className="text-sm text-foreground px-2">{task?.responsible?.name}</p>
+                                        </span>
+                                    </div>
+                                    : <></>
+                                }
                             </CardContent>
                         </Card>
                         <div className="absolute bottom-4 left-2 right-2">
@@ -73,7 +84,17 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                                 <CardDescription>{task.description}</CardDescription>
                             </CardHeader>
                             <CardContent>
-
+                                {task?.responsible?.image ?
+                                    <div>
+                                        <span className="flex items-center">
+                                            <Avatar className="w-[30px] h-[30px]">
+                                                <AvatarImage src={task?.responsible?.image}/>
+                                            </Avatar>
+                                            <p className="text-sm text-foreground px-2">{task?.responsible?.name}</p>
+                                        </span>
+                                    </div>
+                                    : <></>
+                                }
                             </CardContent>
                         </Card>
                         <div className="absolute bottom-4 left-2 right-2">
@@ -95,13 +116,17 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
                                 <Separator className="bg-green-500"/>
-                                <CardDescription>{task.description}</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 {task?.responsible?.image ?
-                                    <Avatar className="w-[30px] h-[30px]">
-                                        <AvatarImage src={task?.responsible?.image}/>
-                                    </Avatar>
+                                    <div>
+                                        <span className="flex items-center">
+                                            <Avatar className="w-[30px] h-[30px]">
+                                                <AvatarImage src={task?.responsible?.image}/>
+                                            </Avatar>
+                                            <p className="text-sm text-foreground px-2">{task?.responsible?.name}</p>
+                                        </span>
+                                    </div>
                                     : <></>
                                 }
                             </CardContent>
