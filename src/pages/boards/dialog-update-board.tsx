@@ -16,6 +16,7 @@ import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, Form
 import {Input} from "~/components/ui/input";
 import * as React from "react";
 import {Textarea} from "~/components/ui/text-area";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/ui/tabs";
 
 type FormValues = {
     boardId: string;
@@ -73,50 +74,92 @@ export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}:
             onClose();
         }}>
             <DialogContent className="sm:max-w-[425px]">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <DialogHeader>
                     <DialogTitle>Detalhes do Quadro</DialogTitle>
                     <DialogDescription>
 
                     </DialogDescription>
                 </DialogHeader>
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <FormField
-                            control={form.control}
-                            name="title"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Título</FormLabel>
-                                    <FormControl>
-                                        <Input{...field}/>
-                                    </FormControl>
-                                    <FormDescription>
-                                        Título para identificar o quadro.
-                                    </FormDescription>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="description"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Descrição</FormLabel>
-                                    <FormControl>
-                                        <Textarea className="text-foreground" placeholder={"Insira a descrição"} {...field} />
-                                    </FormControl>
-                                    <FormDescription>
-                                        Descreva sobre o que se trata quadro.
-                                    </FormDescription>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
 
-                        <Button type="submit" className={"w-full"}>Atualizar</Button>
-                    </form>
-                </Form>
+
+                <Tabs defaultValue="account" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="account">Account</TabsTrigger>
+                        <TabsTrigger value="password">Password</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="account">
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                                <FormField
+                                    control={form.control}
+                                    name="title"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Título</FormLabel>
+                                            <FormControl>
+                                                <Input{...field}/>
+                                            </FormControl>
+                                            <FormDescription>
+                                                Título para identificar o quadro.
+                                            </FormDescription>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="description"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Descrição</FormLabel>
+                                            <FormControl>
+                                                <Textarea className="text-foreground" placeholder={"Insira a descrição"} {...field} />
+                                            </FormControl>
+                                            <FormDescription>
+                                                Descreva sobre o que se trata quadro.
+                                            </FormDescription>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+
+                                <Button type="submit" className={"w-full"}>Atualizar</Button>
+                            </form>
+                        </Form>
+
+                    </TabsContent>
+                    <TabsContent value="password">
+
+
+                    </TabsContent>
+                </Tabs>
+
+
+
             </DialogContent>
         </Dialog>
     );

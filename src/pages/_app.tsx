@@ -28,7 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                       <HeaderComponent/>
                       <div className="flex flex-1">
                           <Sidebar/>
-                          <div className="content-container bg-background text-foreground">
+                          <div className="content-container bg-background text-foreground w-full">
                               <Component { ...pageProps}/>
                               <Toaster/>
                           </div>

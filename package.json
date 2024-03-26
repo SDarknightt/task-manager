@@ -56,6 +56,7 @@
     "select": "^1.1.2",
     "shadcn-ui": "^0.8.0",
     "superjson": "^2.2.1",
+    "tabs": "^0.2.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "textarea": "^0.3.0",

@@ -28,7 +28,7 @@ import {useEffect, useState} from "react";
 import {format} from "date-fns";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {cn} from "~/lib/utils";
-import {CalendarIcon} from "lucide-react";
+import {CalendarIcon, Plus} from "lucide-react";
 import {Calendar} from "~/components/ui/calendar";
 import {Textarea} from "~/components/ui/text-area";
 
@@ -108,8 +108,8 @@ export default function DialogCreateTask({board} : {board: Board}) {
     }
     return (
         <Dialog onOpenChange={()=> form.reset()}>
-            <DialogTrigger asChild>
-                <Button variant="default">Criar Tarefa</Button>
+            <DialogTrigger asChild className={"mt-10 ml-10"}>
+                <Button variant="default"><Plus/> Tarefa</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>

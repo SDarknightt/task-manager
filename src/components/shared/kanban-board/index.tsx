@@ -35,9 +35,8 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
 
 
     return (
-        <div className="flex justify-between">
-            <div key={"TODO"}
-                 className="flex-grow-0  pt-16 flex flex-col items-center justify-start  gap-8 rounded-3xl p-10 m-3 overflow-auto w-full min-w-[400px]">
+        <div className="flex">
+            <div key={"TODO"} className="flex-1 pt-16 flex flex-col items-center justify-start gap-8 rounded-3xl p-10 m-3 overflow-auto ">
                 <div>
                     <h4 className="text-3xl font-bold text-red-600">Para Fazer</h4>
                     <Separator className=""/>
@@ -85,9 +84,9 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                         </div>
                     </div>
                 ))}
-
             </div>
-            <div key={"DOING"} className="flex-grow-0 pt-16 flex flex-col items-center justify-start  gap-8 rounded-3xl p-10 m-3 overflow-auto w-full min-w-[400px]">
+
+            <div key={"DOING"} className="flex-1 pt-16 flex flex-col items-center justify-start gap-8 rounded-3xl m-3 overflow-auto w-full ">
                 <div>
                     <h4 className="text-3xl font-bold text-yellow-500">Fazendo</h4>
                     <Separator/>
@@ -137,8 +136,8 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                     </div>
                 ))}
             </div>
-            <div key={"DONE"}
-                 className="flex-grow-0 pt-16 flex flex-col items-center justify-start  gap-8 rounded-3xl p-10 m-3 overflow-auto w-full min-w-[400px]">
+
+            <div key={"DONE"} className="flex-1 pt-16 flex flex-col items-center justify-start gap-8 rounded-3xl p-10 m-3 overflow-auto w-full ">
                 <div>
                     <h4 className="text-3xl font-bold text-green-500">Feito</h4>
                     <Separator/>

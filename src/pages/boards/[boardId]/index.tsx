@@ -74,17 +74,16 @@ export default function BoardDetails() {
         <Loading/> :
         <div>
             <h2 className="text-lg font-bold m-5 "><HeaderPage board={board} refetchBoard={fetchBoard}/></h2>
-            <div
-                className="md:w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2 md:p-14 ">
-                <div className="w-screen md:w-full -ml-5 md:ml-0 flex select-none justify-between">
-                    <DialogCreateTask board={board} />
-                </div>
-                <div
-                    className=" h-full flex flex-col md:justify-center align-middle items-center p-2">
-                    <div className="w-screen md:w-full -ml-5 md:ml-0 flex justify-end select-none">
-                    </div>
-                    <Kanban users={users} tasks={tasks} fetchTasks={fetchTasks}/>
+            <div className="flex justify-start">
+                <DialogCreateTask board={board}/>
+            </div>
+            <div className="h-full flex align-middle p-2">
+                <div className="h-full w-full flex flex-col align-middle p-2 justify-center">
+                    <Kanban tasks={tasks} fetchTasks={fetchTasks} users={users}/>
                 </div>
             </div>
         </div>
 }
+
+
+

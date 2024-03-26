@@ -42,10 +42,8 @@ export default function MyTasks() {
         <Loading/> :
         <div>
             <h2 className="text-lg font-bold m-5 "><HeaderPage pageName={"Minhas Tarefas"}/></h2>
-            <div
-                className="w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2">
-                <div
-                    className="h-full flex flex-col md:justify-center align-middle items-center p-2">
+            <div className="h-full flex align-middle p-2">
+                <div className="h-full w-full flex flex-col align-middle p-2 justify-center">
                     <Kanban tasks={tasks} fetchTasks={fetchTasks}/>
                 </div>
             </div>
