@@ -82,7 +82,7 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose}: {taskUp
                         <CardFooter className="mt-auto">
                             <div className="flex w-full  justify-between items-center mx-2">
                                 <Button variant={"default"} className={"w-full mr-2 items-center"} onClick={() => { setIsDialogUpdateOpen(true) }}>
-                                    <Pen className={"mr-2"}/>Edit
+                                    <Pen className={"mr-2"}/>Editar
                                 </Button>
                                 <AlertRemoveTask task={taskUpdate} onClose={onClose}/>
                             </div>

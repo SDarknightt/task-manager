@@ -151,5 +151,56 @@ export const boardRouter = createTRPCRouter({
             }catch (error) {
                 throw new Error('Error adding user to board api.');
             }
-        })
+        }),
+
+    deleteBoard: protectedProcedure
+        .input(z.object({boardId: z.string()}))
+        .mutation(async ({input, ctx}) => {
+            try{
+                const board = await ctx.db.board.findUnique({
+                    where: {
+                        id: input.boardId,
+                    },
+                    include: {
+                        users: true,
+                        tasks: true,
+                    },
+                });
+
+                if(board){
+                    const isAdmin = board?.users.some(user => user.userId === ctx.session.user.id && user.admin);
+                    if (!isAdmin) {
+                        throw new Error('User is not an admin of the board');
+                    }
+
+                    await Promise.all(board.tasks.map(task =>
+                        ctx.db.task.delete({
+                            where: {
+                                id: task.id,
+                            },
+                        })
+                    ));
+
+                    await Promise.all(board.users.map(user =>
+                        ctx.db.userBoard.delete({
+                            where: {
+                                userId_boardId: {
+                                    userId: user.userId,
+                                    boardId: board.id,
+                                },
+                            },
+                        })
+                    ));
+                }
+
+                const deletedBoard = await ctx.db.board.delete({
+                    where: {
+                        id: input.boardId,
+                    },
+                });
+                return deletedBoard as Board;
+            }catch (error) {
+                throw new Error('Error deleting board');
+            }
+        }),
 });

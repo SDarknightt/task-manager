@@ -7,7 +7,6 @@ import {toast} from "~/components/ui/use-toast";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle
 } from "~/components/ui/dialog";
@@ -17,6 +16,8 @@ import {Input} from "~/components/ui/input";
 import * as React from "react";
 import {Textarea} from "~/components/ui/text-area";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/ui/tabs";
+import {UsersTable} from "~/pages/boards/[boardId]/users-table";
+import {AlertDeleteBoard} from "~/pages/boards/alert-delete-board";
 
 type FormValues = {
     boardId: string;
@@ -26,7 +27,6 @@ type FormValues = {
 
 export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}: {board: Board, users?: User[], isOpen: boolean, onClose: () => void, refetchBoard: () => void}){
     const apiMutation = api.board.updateBoard.useMutation();
-
     const formSchema = z.object({
         boardId: z.string(),
         title: z.string().min(4, {message: 'Título deve ter no mínimo 4 caracteres.'}),
@@ -73,45 +73,17 @@ export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}:
             form.reset();
             onClose();
         }}>
-            <DialogContent className="sm:max-w-[425px]">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <DialogContent className="max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Detalhes do Quadro</DialogTitle>
-                    <DialogDescription>
-
-                    </DialogDescription>
                 </DialogHeader>
 
-
-                <Tabs defaultValue="account" className="w-full">
+                <Tabs defaultValue="board" className="w-full">
                     <TabsList className="grid w-full grid-cols-2">
-                        <TabsTrigger value="account">Account</TabsTrigger>
-                        <TabsTrigger value="password">Password</TabsTrigger>
+                        <TabsTrigger value="board">Quadro</TabsTrigger>
+                        <TabsTrigger value="users">Membros</TabsTrigger>
                     </TabsList>
-                    <TabsContent value="account">
+                    <TabsContent value="board">
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                                 <FormField
@@ -150,15 +122,12 @@ export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}:
                                 <Button type="submit" className={"w-full"}>Atualizar</Button>
                             </form>
                         </Form>
-
+                        <AlertDeleteBoard board={board}/>
                     </TabsContent>
-                    <TabsContent value="password">
-
-
+                    <TabsContent value="users">
+                        <UsersTable data={users} board={board}/>
                     </TabsContent>
                 </Tabs>
-
-
 
             </DialogContent>
         </Dialog>

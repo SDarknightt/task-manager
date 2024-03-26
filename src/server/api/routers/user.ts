@@ -42,4 +42,50 @@ export const userRouter = createTRPCRouter({
             }
         }),
 
+    removeUserBoard: protectedProcedure
+        .input(z.object({boardId: z.string(), userId: z.string()}))
+        .mutation(async ({input, ctx}) => {
+           try{
+               const removedUser = await ctx.db.user.update({
+                     where: {id: input.userId},
+                     data: {
+                         boards: {
+                             disconnect: {
+                                 boardId: input.boardId,
+                                 userId: input.userId
+                             }
+                         }
+                     }
+                });
+               if(removedUser) {
+                   return removedUser;
+               }
+           } catch (e) {
+               throw new Error('Error removing user from board');
+           }
+        }),
+
+    makeUserAdmin: protectedProcedure
+        .input(z.object({userId: z.string(), boardId: z.string()}))
+        .mutation(async ({input, ctx}) => {
+           try{
+               const newAdmin = await ctx.db.user.update({
+                   where: {id: input.userId},
+                   data: {
+                       boards: {
+                           update: {
+                               where: {boardId: input.boardId, userId: input.userId},
+                               data: {isAdmin: true}
+                           }
+                       }
+                   }
+               });
+                if(newAdmin) {
+                    return newAdmin;
+                }
+           } catch (e) {
+               throw new Error("Error making user admin");
+           }
+        }),
+
 });
