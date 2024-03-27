@@ -45,24 +45,50 @@ export const userRouter = createTRPCRouter({
     removeUserBoard: protectedProcedure
         .input(z.object({boardId: z.string(), userId: z.string()}))
         .mutation(async ({input, ctx}) => {
-           try{
-               const removedUser = await ctx.db.user.update({
-                     where: {id: input.userId},
-                     data: {
-                         boards: {
-                             disconnect: {
-                                 boardId: input.boardId,
-                                 userId: input.userId
-                             }
-                         }
-                     }
+            try{
+                const isAdmin = await ctx.db.userBoard.findUnique({
+                    where: {
+                        userId_boardId: {
+                            userId: ctx.session.user.id,
+                            boardId: input.boardId
+                        }
+                    },
+                    select: {
+                        admin: true
+                    }
                 });
-               if(removedUser) {
-                   return removedUser;
+
+                if(!isAdmin || !isAdmin.admin) {
+                    throw new Error('User is not admin');
+                }
+
+                //first change tasks to null
+               const tasksToNull = await ctx.db.task.updateMany({
+                    where: {
+                        boardId: input.boardId,
+                        responsibleId: input.userId
+                    },
+                    data: {
+                        responsibleId: null
+                    }
+                });
+               if(tasksToNull) {
+                   const removedUserBoard = await ctx.db.userBoard.delete({
+                       where: {
+                           userId_boardId: {
+                               userId: input.userId,
+                               boardId: input.boardId
+                           }
+                       }
+                   });
+
+                   if(removedUserBoard) {
+                       return removedUserBoard;
+                   }
                }
-           } catch (e) {
-               throw new Error('Error removing user from board');
-           }
+            } catch (e) {
+                throw new Error('Error removing user from board');
+            }
         }),
 
     makeUserAdmin: protectedProcedure

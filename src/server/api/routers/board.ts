@@ -115,6 +115,22 @@ export const boardRouter = createTRPCRouter({
         .input(z.object({boardId: z.string(), shareId: z.number()}))
         .mutation(async({ctx, input}) => {
             try{
+                const isAdmin = await ctx.db.userBoard.findUnique({
+                    where: {
+                        userId_boardId: {
+                            userId: ctx.session.user.id,
+                            boardId: input.boardId
+                        }
+                    },
+                    select: {
+                        admin: true
+                    }
+                });
+
+                if(!isAdmin || !isAdmin.admin) {
+                    throw new Error('User is not admin');
+                }
+
                 // Check if user exists
                 const user = await ctx.db.user.findUnique({
                     where: {

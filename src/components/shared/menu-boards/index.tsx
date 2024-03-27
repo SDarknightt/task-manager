@@ -12,20 +12,26 @@ export default function MenuBoards({boardsProps}: {boardsProps: Board[]}){
 
     return (
         <>
-            <div className="pl-20 pt-16 flex flex-column md:flex-row flex-wrap justify-start items-start gap-8 border flex-grow p-10 m-3 overflow-auto w-full rounded-3xl">
-                {boardsProps.map((board) => (
-                    <Card key={board.id} className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0"
-                          onClick={() => redirect(board.id)}>
-                        <CardHeader>
-                            <CardTitle>{board?.title}</CardTitle>
-                            <Separator/>
-                            <CardDescription>{board?.description}</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                        </CardContent>
-                    </Card>
-                ))}
-            </div>
+            {boardsProps.length > 0 ?
+
+                <div
+                    className="pl-20 pt-16 flex flex-column md:flex-row flex-wrap justify-start items-start gap-8 border flex-grow p-10 m-3 overflow-auto w-full rounded-3xl">
+                    {boardsProps.map((board) => (
+                        <Card key={board.id} className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0"
+                              onClick={() => redirect(board.id)}>
+                            <CardHeader>
+                                <CardTitle>{board?.title}</CardTitle>
+                                <Separator/>
+                                <CardDescription>{board?.description}</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+                : <div className={"m-12"}>Nenhum quadro foi encontrado...</div>
+            }
+
         </>
     );
 }
