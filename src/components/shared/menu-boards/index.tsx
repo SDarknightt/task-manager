@@ -13,11 +13,10 @@ export default function MenuBoards({boardsProps}: {boardsProps: Board[]}){
     return (
         <>
             {boardsProps.length > 0 ?
-
                 <div
-                    className="pl-20 pt-16 flex flex-column md:flex-row flex-wrap justify-start items-start gap-8 border flex-grow p-10 m-3 overflow-auto w-full rounded-3xl">
+                    className="flex flex-column flex-wrap justify-center items-start gap-8 border flex-grow p-10 m-3 overflow-auto w-full rounded-3xl">
                     {boardsProps.map((board) => (
-                        <Card key={board.id} className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0"
+                        <Card key={board.id} className="min-w-[280px] w-[20%] min-h-[200px] flex-shrink-0"
                               onClick={() => redirect(board.id)}>
                             <CardHeader>
                                 <CardTitle>{board?.title}</CardTitle>
