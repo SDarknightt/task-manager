@@ -26,7 +26,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
     }
 
     useEffect(() => {
-        if (tasks.length > 0) {
+        if (tasks) {
             setTaskToDo(tasks.filter((task) => task.status === 'TODO'));
             setTaskDoing(tasks.filter((task) => task.status === 'DOING'));
             setTaskDone(tasks.filter((task) => task.status === 'DONE'));
@@ -190,7 +190,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                     </div>
                 ))}
             </div>
-            {isDialogOpen && selectedTask && <DialogTasktDetails taskUpdate={selectedTask} users={users} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
+            {isDialogOpen && selectedTask && <DialogTasktDetails taskUpdate={selectedTask} users={users} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} fetchTasks={fetchTasks}/>}
         </div>
     )
 }

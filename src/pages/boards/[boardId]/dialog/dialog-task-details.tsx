@@ -11,23 +11,14 @@ import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "~/components
 import {Separator} from "~/components/ui/separator";
 import {Avatar, AvatarImage} from "~/components/ui/avatar";
 import {cn} from "~/lib/utils";
-import {Archive, CalendarIcon, PackageOpen, Pen, Trash} from "lucide-react";
+import {CalendarIcon, Pen} from "lucide-react";
 import {Button} from "~/components/ui/button";
 import {Label} from "~/components/ui/label";
-import {
-    AlertDialog, AlertDialogCancel,
-    AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger
-} from "~/components/ui/alert-dialog";
-import {api} from "~/utils/api";
-import {toast} from "~/components/ui/use-toast";
 import {useState} from "react";
 import {DialogUpdateTask} from "~/pages/boards/[boardId]/dialog/dialog-update-task";
+import {AlertRemoveTask} from "~/pages/boards/[boardId]/dialog/alert-remove-task";
 
-export function DialogTasktDetails({taskUpdate, users, isOpen, onClose}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void}) {
-
+export function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTasks}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void, fetchTasks: () => void}) {
     const [isDialogUpdateOpen, setIsDialogUpdateOpen] = useState(false);
 
     return (
@@ -82,74 +73,15 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose}: {taskUp
                                 <Button variant={"default"} className={"w-full mr-2 items-center"} onClick={() => { setIsDialogUpdateOpen(true) }}>
                                     <Pen className={"mr-2"}/>Editar
                                 </Button>
-                                <AlertRemoveTask task={taskUpdate} onClose={onClose}/>
+                                <AlertRemoveTask task={taskUpdate} onClose={onClose} fetchTasks={fetchTasks}/>
                             </div>
                         </CardFooter>
                     </Card>
                 </div>
                 {isDialogUpdateOpen && taskUpdate &&
                     <DialogUpdateTask taskUpdate={taskUpdate} users={users} isOpen={isDialogUpdateOpen}
-                                      onClose={() => setIsDialogUpdateOpen(false)} onCloseDialogDetails={onClose}/>}
+                                      onClose={() => setIsDialogUpdateOpen(false)} onCloseDialogDetails={onClose} fetchTasks={fetchTasks}/>}
             </DialogContent>
         </Dialog>
     );
-}
-
-
-export function AlertRemoveTask({task, onClose}: { task: Task, onClose: () => void }) {
-    const deleteMutation = api.task.deleteTask.useMutation();
-    const disableMutation = api.task.disableTask.useMutation();
-
-    async function disableTask(taskId: string){
-        const disableTask = await disableMutation.mutateAsync({taskId: taskId});
-        if (disableTask) {
-            onClose();
-            toast({
-                title: "Sucesso!",
-                description: "Tarefa archivada com sucesso.",
-            })
-        } else {
-            toast({
-                title: "Erro!",
-                description: "Erro ao archivar tarefa.",
-            })
-        }
-    }
-    async function deleteTask(taskId: string) {
-        const deleteTask = await deleteMutation.mutateAsync({taskId: taskId});
-        if (deleteTask) {
-            onClose();
-            toast({
-                title: "Sucesso!",
-                description: "Tarefa deletada com sucesso.",
-            })
-        } else {
-            toast({
-                title: "Erro!",
-                description: "Erro ao deletar tarefa.",
-            })
-        }
-    }
-    return (
-        <AlertDialog>
-            <AlertDialogTrigger asChild>
-                <Button variant={"destructive"} className={"w-full items-center"}>
-                    <PackageOpen className={"mr-2"}/>Remover
-                </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        Você pode excluir permanetemente ou arquivar para visualizar posteriormente.
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                    <Button variant={"destructive"} onClick={() => deleteTask(task.id)}><Trash className={"mr-2"}/>Deletar</Button>
-                    <Button variant={"secondary"} className={"bg-yellow-500 text-white"} onClick={() => disableTask(task.id)}><Archive className={"mr-2"}/>Arquivar</Button>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
-    )
 }

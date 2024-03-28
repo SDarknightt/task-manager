@@ -78,7 +78,7 @@ export default function BoardDetails() {
             <h2 className="text-lg font-bold m-5 "><HeaderPage board={board} refetchBoard={fetchBoard}/></h2>
             <div className="flex justify-start">
                 <Button variant="default" className="mt-10 ml-10" onClick={() => setIsDialogOpen(true)}><Plus/> Tarefa</Button>
-                {isDialogOpen && board && <DialogCreateTask board={board} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
+                {isDialogOpen && board && <DialogCreateTask board={board} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} fetchTasks={fetchTasks}/>}
             </div>
             <div className="h-full flex align-middle p-2">
                 <div className="h-full w-full flex flex-col align-middle p-2 justify-center">

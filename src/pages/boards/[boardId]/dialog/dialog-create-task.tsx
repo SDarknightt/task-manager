@@ -40,7 +40,7 @@ type FormValues = {
     estimatedDate?: Date;
 }
 
-export default function DialogCreateTask({board, isOpen, onClose} : {board: Board,isOpen: boolean, onClose: () => void}) {
+export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : {board: Board,isOpen: boolean, onClose: () => void, fetchTasks: () => void}) {
     const apiMutation = api.task.createTask.useMutation();
     const apiContext = api.useContext();
     const [users, setUsers] = useState([] as User[]);
@@ -92,6 +92,7 @@ export default function DialogCreateTask({board, isOpen, onClose} : {board: Boar
             form.reset();
             if(createTask){
                 onClose();
+                fetchTasks();
                 toast({
                     title: "Sucesso!",
                     description: "Tarefa criada com sucesso.",

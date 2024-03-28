@@ -16,7 +16,7 @@ export default function MenuBoards({boardsProps}: {boardsProps: Board[]}){
                 <div
                     className="flex flex-column flex-wrap justify-center items-start gap-8 border flex-grow p-10 m-3 overflow-auto w-full rounded-3xl">
                     {boardsProps.map((board) => (
-                        <Card key={board.id} className="min-w-[280px] w-[20%] min-h-[200px] flex-shrink-0"
+                        <Card key={board.id} className="min-w-[280px] w-[20%] min-h-[200px] flex-shrink-0 cursor-pointer"
                               onClick={() => redirect(board.id)}>
                             <CardHeader>
                                 <CardTitle>{board?.title}</CardTitle>
