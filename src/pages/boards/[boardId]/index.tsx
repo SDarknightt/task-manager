@@ -7,6 +7,8 @@ import Loading from "~/components/shared/loading/loading";
 import DialogCreateTask from "~/pages/boards/[boardId]/dialog/dialog-create-task";
 import {Kanban} from "src/components/shared/kanban-board";
 import {HeaderPage} from "src/components/shared/header-page";
+import {Button} from "~/components/ui/button";
+import {Plus} from "lucide-react";
 
 export default function BoardDetails() {
     const router = useRouter();
@@ -16,7 +18,7 @@ export default function BoardDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [users, setUsers] = useState([] as User[]);
     const apiContext = api.useContext();
-
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const fetchUsers = async () => {
         try {
             const response = await apiContext.board.getUsersOnBoard.fetch({boardId: boardURL});
@@ -75,7 +77,8 @@ export default function BoardDetails() {
         <div>
             <h2 className="text-lg font-bold m-5 "><HeaderPage board={board} refetchBoard={fetchBoard}/></h2>
             <div className="flex justify-start">
-                <DialogCreateTask board={board}/>
+                <Button variant="default" className="mt-10 ml-10" onClick={() => setIsDialogOpen(true)}><Plus/> Tarefa</Button>
+                {isDialogOpen && board && <DialogCreateTask board={board} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
             </div>
             <div className="h-full flex align-middle p-2">
                 <div className="h-full w-full flex flex-col align-middle p-2 justify-center">

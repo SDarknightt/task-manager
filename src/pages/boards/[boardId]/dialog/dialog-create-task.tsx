@@ -40,7 +40,7 @@ type FormValues = {
     estimatedDate?: Date;
 }
 
-export default function DialogCreateTask({board} : {board: Board}) {
+export default function DialogCreateTask({board, isOpen, onClose} : {board: Board,isOpen: boolean, onClose: () => void}) {
     const apiMutation = api.task.createTask.useMutation();
     const apiContext = api.useContext();
     const [users, setUsers] = useState([] as User[]);
@@ -91,6 +91,7 @@ export default function DialogCreateTask({board} : {board: Board}) {
             });
             form.reset();
             if(createTask){
+                onClose();
                 toast({
                     title: "Sucesso!",
                     description: "Tarefa criada com sucesso.",
@@ -107,10 +108,7 @@ export default function DialogCreateTask({board} : {board: Board}) {
         }
     }
     return (
-        <Dialog onOpenChange={()=> form.reset()}>
-            <DialogTrigger asChild className={"mt-10 ml-10"}>
-                <Button variant="default"><Plus/> Tarefa</Button>
-            </DialogTrigger>
+        <Dialog open={isOpen} onOpenChange={()=> {form.reset(); onClose();}}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Criar Tarefa</DialogTitle>
