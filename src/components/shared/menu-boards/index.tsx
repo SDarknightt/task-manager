@@ -21,10 +21,8 @@ export default function MenuBoards({boardsProps}: {boardsProps: Board[]}){
                             <CardHeader>
                                 <CardTitle>{board?.title}</CardTitle>
                                 <Separator/>
-                                <CardDescription>{board?.description}</CardDescription>
+                                <p className="break-words text-gray-400">{board?.description}</p>
                             </CardHeader>
-                            <CardContent>
-                            </CardContent>
                         </Card>
                     ))}
                 </div>

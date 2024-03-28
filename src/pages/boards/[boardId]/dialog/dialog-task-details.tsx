@@ -13,7 +13,6 @@ import {Avatar, AvatarImage} from "~/components/ui/avatar";
 import {cn} from "~/lib/utils";
 import {Archive, CalendarIcon, PackageOpen, Pen, Trash} from "lucide-react";
 import {Button} from "~/components/ui/button";
-import {Textarea} from "~/components/ui/text-area";
 import {Label} from "~/components/ui/label";
 import {
     AlertDialog, AlertDialogCancel,
@@ -74,8 +73,7 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose}: {taskUp
                                 <div className=" mt-3 rounded-lg p-2 flex-wrap items-center">
                                     <div className="grid w-full gap-1.5">
                                         <Label htmlFor="description">Descrição</Label>
-                                        <Textarea className="text-foreground" id="description" disabled={true}
-                                                  defaultValue={ taskUpdate?.description ? taskUpdate?.description : ""}/>
+                                        <p className="break-words max-w-[300px]">{taskUpdate?.description}</p>
                                     </div>
                                 </div>
                         </CardContent>

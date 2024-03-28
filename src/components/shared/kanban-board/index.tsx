@@ -22,7 +22,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
 
     async function updateTaskStatus(id: string, status: string) {
         await useMutation.mutateAsync({id: id, status: status});
-        void fetchTasks;
+        void fetchTasks();
     }
 
     useEffect(() => {
@@ -36,14 +36,14 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
 
     return (
         <div className="flex">
-            <div key={"TODO"} className="flex-1 pt-16 flex flex-col items-center justify-start gap-8 rounded-3xl p-10 m-3 overflow-auto ">
+            <div key={"TODO"} className="flex-1 pt-16 flex flex-col items-center justify-start gap-8 rounded-3xl p-10 m-3 overflow-auto">
                 <div>
                     <h4 className="text-3xl font-bold text-red-600">Para Fazer</h4>
                     <Separator className=""/>
                 </div>
                 {taskToDo.map((task) => (
                     <div key={task.id} className="relative">
-                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-red-500" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}}>
+                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-red-500 cursor-pointer" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}}>
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
                                 <Separator className="bg-red-500"/>
@@ -93,7 +93,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                 </div>
                 {taskDoing.map((task) => (
                     <div key={task.id} className="relative">
-                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-yellow-500" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}} >
+                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-yellow-500 cursor-pointer" onClick={() => {setIsDialogOpen(true); setSelectedTask(task);}} >
                             <CardHeader>
                                 <CardTitle>{task.title}</CardTitle>
                                 <Separator className="bg-yellow-500"/>
@@ -144,7 +144,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                 </div>
                 {taskDone.map((task) => (
                     <div key={task.id} className="relative">
-                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-green-500"
+                        <Card className="min-w-[300px] max-w-[300px] min-h-[200px] flex-shrink-0 border-green-500 cursor-pointer"
                               onClick={() => {
                                   setIsDialogOpen(true);
                                   setSelectedTask(task);

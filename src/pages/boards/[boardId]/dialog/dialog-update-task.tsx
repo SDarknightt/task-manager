@@ -7,7 +7,6 @@ import {toast} from "~/components/ui/use-toast";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle
 } from "~/components/ui/dialog";

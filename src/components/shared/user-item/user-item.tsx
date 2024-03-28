@@ -29,7 +29,7 @@ export default function UserItem(){
     }
 
     return (
-        <div className="flex items-center justify-center gap-2 border rounded-[40px] p-4" onClick={handleOpen}>
+        <div className="flex items-center justify-center gap-2 border rounded-[40px] p-4 cursor-pointer" onClick={handleOpen}>
             <div className="avatar rounded-full min-h-12 min-w-12 bg-emerald-500 text-white flex item items-center font-[700] justify-center">
                 { sessionData?.user?.image ?
                     <p>
