@@ -1,4 +1,4 @@
-import {string, z} from "zod";
+import {z} from "zod";
 
 import {
     createTRPCRouter,
@@ -90,28 +90,4 @@ export const userRouter = createTRPCRouter({
                 throw new Error('Error removing user from board');
             }
         }),
-
-    makeUserAdmin: protectedProcedure
-        .input(z.object({userId: z.string(), boardId: z.string()}))
-        .mutation(async ({input, ctx}) => {
-           try{
-               const newAdmin = await ctx.db.user.update({
-                   where: {id: input.userId},
-                   data: {
-                       boards: {
-                           update: {
-                               where: {boardId: input.boardId, userId: input.userId},
-                               data: {isAdmin: true}
-                           }
-                       }
-                   }
-               });
-                if(newAdmin) {
-                    return newAdmin;
-                }
-           } catch (e) {
-               throw new Error("Error making user admin");
-           }
-        }),
-
 });

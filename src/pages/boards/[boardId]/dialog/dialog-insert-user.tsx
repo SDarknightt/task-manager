@@ -19,8 +19,7 @@ import {toast} from "~/components/ui/use-toast";
 import {Board} from "~/utils/types";
 import {PlusIcon} from "lucide-react";
 
-export default function DialogInsertUser({board} : {board: Board}) {
-
+export default function DialogInsertUser({board, fetchUsers} : {board: Board, fetchUsers: () => void}) {
     return (
         <Dialog>
             <DialogTrigger asChild  className="border border-dashed flex items-center w-9 h-9 border-gray-500 justify-center rounded-full">
@@ -34,7 +33,7 @@ export default function DialogInsertUser({board} : {board: Board}) {
                     </DialogDescription>
                 </DialogHeader>
                 <div className="flex justify-center items-center">
-                    <AddUserInput board={board}/>
+                    <AddUserInput board={board} fetchUsers={fetchUsers}/>
                 </div>
             </DialogContent>
         </Dialog>
@@ -42,7 +41,7 @@ export default function DialogInsertUser({board} : {board: Board}) {
 }
 
 
-export function AddUserInput({board}: {board: Board}) {
+export function AddUserInput({board, fetchUsers}: {board: Board, fetchUsers: () => void}) {
     const apiMutation = api.board.addUserToBoard.useMutation()
 
     const FormSchema = z.object({
@@ -64,6 +63,7 @@ export function AddUserInput({board}: {board: Board}) {
             boardId: board.id
         });
         if (response) {
+            void fetchUsers();
             toast({
                 title: "Sucesso!",
                 description: "Usúario inserido com sucesso.",

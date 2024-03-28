@@ -59,7 +59,7 @@ export function HeaderPage({board, pageName, refetchBoard}: {board?: Board, page
 
                 {board ?
                     <li>
-                       <DialogInsertUser board={board}/>
+                       <DialogInsertUser board={board} fetchUsers={fetchUsers}/>
                     </li>
                     : <></>
                 }

@@ -17,7 +17,7 @@ export default function HeaderComponent () {
                 <div className="flex flex-row self-center ml-2">
                         <Image
                             src="/assets/logo.svg"
-                            width={100}
+                            width={80}
                             height={0}
                             style={{filter: filter}}
                             alt="Logo KanPlan"
