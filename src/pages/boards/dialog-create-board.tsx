@@ -23,7 +23,7 @@ type FormValues = {
     description: string | undefined;
 };
 
-export default function DialogCreateBoard() {
+export default function DialogCreateBoard({isOpen, onClose}:{isOpen: boolean, onClose:() => void}) {
 
     const apiMutation = api.board.createBoard.useMutation();
     const formSchema = z.object({
@@ -45,6 +45,7 @@ export default function DialogCreateBoard() {
                 description: data.description,
             });
             if(createBoard){
+                onClose();
                 toast({
                     title: "Sucesso!",
                     description: "Quadro criado com sucesso.",
@@ -61,10 +62,7 @@ export default function DialogCreateBoard() {
         }
     }
     return (
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button variant="default">Criar Quadro</Button>
-            </DialogTrigger>
+        <Dialog open={isOpen} onOpenChange={() => onClose()}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Criar Quadro</DialogTitle>
