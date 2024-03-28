@@ -65,7 +65,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                                     <div className="flex items-start">
                                         {task.estimatedDate ?
                                             <Button
-                                                variant={"outline"}
+                                                variant={"ghost"}
                                                 className={cn(
                                                     "w-auto pl-3 text-left font-normal border-red-500",
                                                     !task.estimatedDate && "text-muted-foreground"
@@ -115,7 +115,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                                     <div className="flex items-start">
                                         {task.estimatedDate ?
                                             <Button
-                                                variant={"outline"}
+                                                variant={"ghost"}
                                                 className={cn(
                                                     "w-auto pl-3 text-left font-normal border-yellow-500",
                                                     !task.estimatedDate && "text-muted-foreground"
@@ -170,7 +170,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
                                     <div className="flex items-start">
                                         {task.estimatedDate ?
                                             <Button
-                                                variant={"outline"}
+                                                variant={"ghost"}
                                                 className={cn(
                                                     "w-auto pl-3 text-left font-normal border-green-500",
                                                     !task.estimatedDate && "text-muted-foreground"

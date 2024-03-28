@@ -48,7 +48,7 @@ export default function Boards() {
                     <Button variant="default" onClick={() => setIsDialogOpen(true)}>Criar Quadro</Button>
                 </div>
                 <MenuBoards boardsProps={boards}/>
-                { isDialogOpen && <DialogCreateBoard isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
+                { isDialogOpen && <DialogCreateBoard isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} fetchBoards={fetchBoard}/>}
             </div>
         </div>
 }

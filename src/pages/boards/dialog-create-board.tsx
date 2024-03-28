@@ -7,8 +7,7 @@ import {
     DialogContent,
     DialogDescription,
     DialogHeader,
-    DialogTitle,
-    DialogTrigger
+    DialogTitle
 } from "~/components/ui/dialog";
 import {Button} from "~/components/ui/button";
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
@@ -23,7 +22,7 @@ type FormValues = {
     description: string | undefined;
 };
 
-export default function DialogCreateBoard({isOpen, onClose}:{isOpen: boolean, onClose:() => void}) {
+export default function DialogCreateBoard({isOpen, onClose, fetchBoards}:{isOpen: boolean, onClose:() => void, fetchBoards: () => void}) {
 
     const apiMutation = api.board.createBoard.useMutation();
     const formSchema = z.object({
@@ -46,6 +45,7 @@ export default function DialogCreateBoard({isOpen, onClose}:{isOpen: boolean, on
             });
             if(createBoard){
                 onClose();
+                fetchBoards();
                 toast({
                     title: "Sucesso!",
                     description: "Quadro criado com sucesso.",

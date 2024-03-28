@@ -46,6 +46,10 @@ export const userRouter = createTRPCRouter({
         .input(z.object({boardId: z.string(), userId: z.string()}))
         .mutation(async ({input, ctx}) => {
             try{
+                if(ctx.session.user.id === input.userId) {
+                    throw new Error('User cannot remove itself');
+                }
+
                 const isAdmin = await ctx.db.userBoard.findUnique({
                     where: {
                         userId_boardId: {

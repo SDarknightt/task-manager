@@ -39,18 +39,6 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTas
                         <CardContent className={"max-w-[400px]"}>
                             {taskUpdate.estimatedDate ?? taskUpdate.responsible ?
                                 <div className="flex justify-between">
-                                    <div>
-                                        {taskUpdate.estimatedDate ?
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "w-auto pl-3 text-left font-normal",
-                                                    !taskUpdate.estimatedDate && "text-muted-foreground"
-                                                )}>
-                                                {format(taskUpdate.estimatedDate, "dd/MM/yyyy")}
-                                                <CalendarIcon className="ml-2 h-4 w-4 opacity-50"/>
-                                            </Button> : <></>}
-                                    </div>
                                     <span className="flex justify-end items-center">
                                         <Avatar className="w-[30px] h-[30px]">
                                             <AvatarImage src={taskUpdate?.responsible?.image}/>
@@ -59,19 +47,33 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTas
                                             {taskUpdate?.responsible?.name}
                                         </p>
                                     </span>
-                                </div>
-                                : <></>}
-                                <div className=" mt-3 rounded-lg p-2 flex-wrap items-center">
-                                    <div className="grid w-full gap-1.5">
-                                        <Label htmlFor="description">Descrição</Label>
-                                        <p className="break-words max-w-[300px]">{taskUpdate?.description}</p>
+                                    <div>
+                                        {taskUpdate.estimatedDate ?
+                                            <Button
+                                                variant={"ghost"}
+                                                className={cn(
+                                                    "w-auto pl-3 text-left font-normal",
+                                                    !taskUpdate.estimatedDate && "text-muted-foreground"
+                                                )}>
+                                                {format(taskUpdate.estimatedDate, "dd/MM/yyyy")}
+                                                <CalendarIcon className="ml-2 h-4 w-4 opacity-50"/>
+                                            </Button> : <></>}
                                     </div>
                                 </div>
+                                : <></>}
+                            <div className=" mt-3 rounded-lg p-2 flex-wrap items-center">
+                                <div className="grid w-full gap-1.5">
+                                    <Label htmlFor="description">Descrição</Label>
+                                    <p className="break-words max-w-[300px]">{taskUpdate?.description}</p>
+                                </div>
+                            </div>
                         </CardContent>
                         <CardFooter className="mt-auto">
                             <div className="flex w-full  justify-between items-center mx-2">
-                                <Button variant={"default"} className={"w-full mr-2 items-center"} onClick={() => { setIsDialogUpdateOpen(true) }}>
-                                    <Pen className={"mr-2"}/>Editar
+                                <Button variant={"default"} className={"w-full mr-2 items-center"} onClick={() => {
+                                    setIsDialogUpdateOpen(true)
+                                }}>
+                                <Pen className={"mr-2"}/>Editar
                                 </Button>
                                 <AlertRemoveTask task={taskUpdate} onClose={onClose} fetchTasks={fetchTasks}/>
                             </div>
