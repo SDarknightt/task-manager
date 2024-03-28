@@ -91,7 +91,7 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose}: {taskUp
                 </div>
                 {isDialogUpdateOpen && taskUpdate &&
                     <DialogUpdateTask taskUpdate={taskUpdate} users={users} isOpen={isDialogUpdateOpen}
-                                      onClose={() => setIsDialogUpdateOpen(false)}/>}
+                                      onClose={() => setIsDialogUpdateOpen(false)} onCloseDialogDetails={onClose}/>}
             </DialogContent>
         </Dialog>
     );

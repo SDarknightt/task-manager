@@ -31,7 +31,7 @@ type FormValues = {
     estimatedDate?: Date;
 }
 
-export function DialogUpdateTask({taskUpdate, users, isOpen, onClose}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void}) {
+export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDialogDetails}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void, onCloseDialogDetails: () => void}) {
     const apiMutation = api.task.updateTask.useMutation();
 
     const formSchema = z.object({
@@ -67,6 +67,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose}: {taskUpda
             });
             if (updateTask) {
                 onClose();
+                onCloseDialogDetails();
                 toast({
                     title: "Sucesso!",
                     description: "Tarefa atualizada com sucesso.",
@@ -91,9 +92,6 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose}: {taskUpda
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Detalhes da Tarefa</DialogTitle>
-                    <DialogDescription>
-
-                    </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
