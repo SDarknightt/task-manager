@@ -17,7 +17,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/c
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {cn} from "~/lib/utils";
 import {format} from "date-fns";
-import {CalendarIcon} from "lucide-react";
+import {CalendarIcon, Pen} from "lucide-react";
 import {Calendar} from "~/components/ui/calendar";
 import * as React from "react";
 import {Textarea} from "~/components/ui/text-area";
@@ -199,7 +199,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
                             )}
                         />
 
-                        <Button type="submit" className={"w-full"}>Atualizar</Button>
+                        <Button type="submit" className={"w-full"}><Pen/>Atualizar</Button>
                     </form>
                 </Form>
             </DialogContent>

@@ -18,6 +18,7 @@ import {Textarea} from "~/components/ui/text-area";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/ui/tabs";
 import {UsersTable} from "~/pages/boards/[boardId]/users-table";
 import {AlertDeleteBoard} from "~/pages/boards/alert-delete-board";
+import {Pen} from "lucide-react";
 
 type FormValues = {
     boardId: string;
@@ -119,7 +120,7 @@ export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}:
                                     )}
                                 />
 
-                                <Button type="submit" className={"w-full"}>Atualizar</Button>
+                                <Button type="submit" className={"w-full"}><Pen/>Atualizar</Button>
                             </form>
                         </Form>
                         <AlertDeleteBoard board={board}/>

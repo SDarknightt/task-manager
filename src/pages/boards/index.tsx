@@ -7,6 +7,7 @@ import Loading from "~/components/shared/loading/loading";
 import {HeaderPage} from "src/components/shared/header-page";
 import MenuBoards from "~/components/shared/menu-boards";
 import {Button} from "~/components/ui/button";
+import {Plus} from "lucide-react";
 
 export default function Boards() {
     const [boards, setBoards] = useState([] as Board[]);
@@ -45,7 +46,7 @@ export default function Boards() {
             <div
                 className="  md:w-[82vw] h-full flex flex-col md:justify-center align-middle items-center p-2 md:p-14 ">
                 <div className="w-screen md:w-full -ml-5 md:ml-0 flex justify-end select-none">
-                    <Button variant="default" onClick={() => setIsDialogOpen(true)}>Criar Quadro</Button>
+                    <Button variant="default" onClick={() => setIsDialogOpen(true)}><Plus/> Quadro</Button>
                 </div>
                 <MenuBoards boardsProps={boards}/>
                 { isDialogOpen && <DialogCreateBoard isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} fetchBoards={fetchBoard}/>}

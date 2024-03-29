@@ -8,7 +8,7 @@ import DialogCreateTask from "~/pages/boards/[boardId]/dialog/dialog-create-task
 import {Kanban} from "src/components/shared/kanban-board";
 import {HeaderPage} from "src/components/shared/header-page";
 import {Button} from "~/components/ui/button";
-import {CalendarIcon, Plus} from "lucide-react";
+import {CalendarIcon, Plus, Trash} from "lucide-react";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/ui/tabs";
 import {
     Table,
@@ -28,6 +28,7 @@ import {Calendar} from "~/components/ui/calendar";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {DateRange} from "react-day-picker";
 import {cn} from "~/lib/utils";
+import {toast} from "~/components/ui/use-toast";
 
 export default function BoardDetails() {
     const router = useRouter();
@@ -95,7 +96,7 @@ export default function BoardDetails() {
         <Loading/> :
         <div>
             <h2 className="text-lg font-bold m-5 "><HeaderPage board={board} refetchBoard={fetchBoard}/></h2>
-            <div className="flex justify-start">
+            <div className="flex justify-end mr-5">
                 <Button variant="default" className="mt-10 ml-10" onClick={() => setIsDialogOpen(true)}><Plus/> Tarefa</Button>
                 {isDialogOpen && board && <DialogCreateTask board={board} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} fetchTasks={fetchTasks}/>}
             </div>
@@ -127,12 +128,33 @@ export function TasksLog({board}:{board: Board}) {
     const apiContext = api.useContext();
     const [startDate, setStartDate] = useState<Date | undefined>(undefined);
     const [endDate, setEndDate] = useState<Date | undefined>(undefined);
+    const deleteMutation = api.task.deleteTask.useMutation();
+
     const fetchDisabledTasks = async () => {
         const tasks = await apiContext.task.getTasks.fetch({boardId: board.id, disabled: true, query: query, startDate: startDate, endDate: endDate});
         if(tasks){
             setTasks(tasks);
         }
     }
+
+    async function deleteTask(taskId: string) {
+        console.log("taskId", taskId);
+        const deleteTask = await deleteMutation.mutateAsync({taskId: taskId});
+        if (deleteTask) {
+            fetchDisabledTasks();
+            toast({
+                title: "Sucesso!",
+                description: "Tarefa deletada com sucesso.",
+            })
+        } else {
+            toast({
+                title: "Erro!",
+                description: "Erro ao deletar tarefa.",
+            })
+        }
+    }
+
+
     useEffect(() => {
         void fetchDisabledTasks();
         const pooling = setInterval(() => {
@@ -163,7 +185,7 @@ export function TasksLog({board}:{board: Board}) {
             </div>
 
             <div className="w-full">
-                <Table className="items-center">
+                <Table className="items-center rounded-md">
                     <TableCaption>Lista de tarefas finalizadas</TableCaption>
                     <TableHeader>
                         <TableRow>
@@ -171,6 +193,7 @@ export function TasksLog({board}:{board: Board}) {
                             <TableHead>Responsável</TableHead>
                             <TableHead>Data de Criação</TableHead>
                             <TableHead>Data de Finalização</TableHead>
+                            <TableHead>Deletar</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -180,15 +203,13 @@ export function TasksLog({board}:{board: Board}) {
                                 <TableCell>{task?.responsible?.name ? task?.responsible?.name : "-" }</TableCell>
                                 <TableCell>{format(task.creationDate, "dd/MM/yyyy")}</TableCell>
                                 <TableCell>{format(task?.endDate, "dd/MM/yyyy")}</TableCell>
+                                <TableCell><Button variant={"destructive"} onClick={() => deleteTask(task.id)}><Trash/></Button></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                     <TableFooter>
                         <TableRow>
                             <TableCell colSpan={10}>Total de tarefas: </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell colSpan={10}> </TableCell>
                         </TableRow>
                     </TableFooter>
                 </Table>
