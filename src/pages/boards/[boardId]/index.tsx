@@ -209,7 +209,7 @@ export function TasksLog({board}:{board: Board}) {
                     </TableBody>
                     <TableFooter>
                         <TableRow>
-                            <TableCell colSpan={10}>Total de tarefas: </TableCell>
+                            <TableCell colSpan={10}>Total de tarefas: {tasks.length}</TableCell>
                         </TableRow>
                     </TableFooter>
                 </Table>

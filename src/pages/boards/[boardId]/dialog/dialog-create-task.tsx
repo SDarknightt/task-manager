@@ -2,10 +2,8 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger
 } from "~/components/ui/dialog";
 import {Button} from "~/components/ui/button";
 import * as React from "react";
@@ -28,14 +26,14 @@ import {useEffect, useState} from "react";
 import {format} from "date-fns";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {cn} from "~/lib/utils";
-import {CalendarIcon, Plus} from "lucide-react";
+import {CalendarIcon} from "lucide-react";
 import {Calendar} from "~/components/ui/calendar";
 import {Textarea} from "~/components/ui/text-area";
 
 type FormValues = {
     title: string;
     description?: string;
-    responsibleId?: string;
+    responsibleId?: string | null;
     boardId: string;
     estimatedDate?: Date;
 }
@@ -79,8 +77,8 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
 
     async function onSubmit(data: FormValues) {
         try {
-            if(!data.responsibleId){
-                data.responsibleId = undefined;
+            if(data.responsibleId === "without" || !data.responsibleId){
+                data.responsibleId = null;
             }
             const createTask = await apiMutation.mutateAsync({
                 title: data.title,
@@ -113,9 +111,6 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Criar Tarefa</DialogTitle>
-                    <DialogDescription>
-
-                    </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -155,16 +150,22 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
                         <FormField
                             control={form.control}
                             name="responsibleId"
-                            render={({field}) => (
+                            render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Responsável</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value!}
+                                    >
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue defaultValue="" placeholder="Selecione um responsável"/>
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent className="max-h-60 overflow-y-auto">
+                                            <SelectItem key={"without"} value={"without"}>
+                                                Sem responsável
+                                            </SelectItem>
                                             {users?.map((user: User) => {
                                                 return (
                                                     <SelectItem value={user.id} key={user.id}>{user.name}</SelectItem>

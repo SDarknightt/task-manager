@@ -26,7 +26,7 @@ type FormValues = {
     taskId: string;
     title: string;
     description?: string;
-    responsibleId?: string;
+    responsibleId?: string | null;
     estimatedDate?: Date;
 }
 
@@ -54,8 +54,8 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
 
     async function onSubmit(data: FormValues) {
         try {
-            if(!data.responsibleId){
-                data.responsibleId = undefined;
+            if(data.responsibleId === "without" || !data.responsibleId){
+                data.responsibleId = null;
             }
             const updateTask = await apiMutation.mutateAsync({
                 taskId: taskUpdate.id,
@@ -133,13 +133,16 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
                             render={({field}) => (
                                 <FormItem>
                                     <FormLabel>Responsável</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value!}>
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue placeholder={taskUpdate?.responsible?.name ? taskUpdate?.responsible?.name : "Selecione um responsável"}/>
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent className="max-h-60 overflow-y-auto">
+                                            <SelectItem key={"without"} value={"without"}>
+                                                Sem responsável
+                                            </SelectItem>
                                             {users?.map((user: User) => {
                                                 return (
                                                     <SelectItem value={user.id} key={user.id}>{user.name}</SelectItem>
