@@ -4,7 +4,7 @@ import {useTheme} from "next-themes";
 import { Menubar } from "~/components/ui/menubar";
 import Image from "next/image";
 
-export default function HeaderComponent () {
+export default function Header() {
     const { theme, setTheme } = useTheme();
     const [filter, setFilter]  = useState('none')
 

@@ -17,7 +17,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/c
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {cn} from "~/lib/utils";
 import {format} from "date-fns";
-import {CalendarIcon, Pen} from "lucide-react";
+import {CalendarIcon, CalendarX2, Pen} from "lucide-react";
 import {Calendar} from "~/components/ui/calendar";
 import * as React from "react";
 import {Textarea} from "~/components/ui/text-area";
@@ -27,7 +27,7 @@ type FormValues = {
     title: string;
     description?: string;
     responsibleId?: string | null;
-    estimatedDate?: Date;
+    estimatedDate?: Date | null;
 }
 
 export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDialogDetails, fetchTasks}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void, onCloseDialogDetails: () => void, fetchTasks: () => void}) {
@@ -38,7 +38,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
         title: z.string().min(4, {message: 'Título deve ter no mínimo 4 caracteres.'}),
         description: z.string().max(255,"Descrição pode ter no máximo 255 letras.").optional(),
         responsibleId: z.string().optional(),
-        estimatedDate: z.date().optional(),
+        estimatedDate: z.date().optional().nullable(),
     })
 
     const form = useForm<FormValues>({
@@ -48,7 +48,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
             title: taskUpdate.title,
             responsibleId: taskUpdate.responsibleId ? taskUpdate.responsibleId : '',
             description: taskUpdate.description ? taskUpdate.description : '',
-            estimatedDate: taskUpdate.estimatedDate ? taskUpdate.estimatedDate : undefined,
+            estimatedDate: taskUpdate.estimatedDate ? taskUpdate.estimatedDate : null,
         },
     });
 
@@ -192,6 +192,8 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
                                                 }
                                                 initialFocus
                                             />
+                                            {field.value &&
+                                            <Button className="m-2" onClick={() => field.onChange(null)}><CalendarX2/></Button>}
                                         </PopoverContent>
                                     </Popover>
                                     <FormDescription>

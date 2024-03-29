@@ -13,7 +13,7 @@ export const taskRouter = createTRPCRouter({
             description: z.string().optional(),
             boardId: z.string(),
             responsibleId: z.string().optional().nullable(),
-            estimatedDate: z.date().optional(),
+            estimatedDate: z.date().optional().nullable(),
         }))
         .mutation(async ({input, ctx}) => {
             try{
@@ -103,7 +103,7 @@ export const taskRouter = createTRPCRouter({
             title: z.string(),
             description: z.string().optional(),
             responsibleId: z.string().optional().nullable(),
-            estimatedDate: z.date().optional(),
+            estimatedDate: z.date().optional().nullable(),
         }))
         .mutation(async ({input, ctx}) => {
             try{

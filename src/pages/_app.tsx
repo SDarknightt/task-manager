@@ -9,6 +9,7 @@ import HeaderComponent from "~/components/shared/header/header";
 import {ThemeProvider} from "~/components/theme-provider";
 import Sidebar from "~/components/shared/sidebar/sidebar";
 import {Toaster} from "~/components/ui/toaster";
+import Footer from "~/components/shared/footer/footer";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -33,6 +34,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                               <Toaster/>
                           </div>
                       </div>
+                      <Footer/>
                   </main>
               </AuthHandler>
           </ThemeProvider>

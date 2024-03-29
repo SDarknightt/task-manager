@@ -26,7 +26,7 @@ import {useEffect, useState} from "react";
 import {format} from "date-fns";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {cn} from "~/lib/utils";
-import {CalendarIcon} from "lucide-react";
+import {CalendarIcon, CalendarX2} from "lucide-react";
 import {Calendar} from "~/components/ui/calendar";
 import {Textarea} from "~/components/ui/text-area";
 
@@ -35,7 +35,7 @@ type FormValues = {
     description?: string;
     responsibleId?: string | null;
     boardId: string;
-    estimatedDate?: Date;
+    estimatedDate?: Date | null;
 }
 
 export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : {board: Board,isOpen: boolean, onClose: () => void, fetchTasks: () => void}) {
@@ -62,7 +62,7 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
         title: z.string().min(4, {message: 'Título deve ter no mínimo 4 caracteres.'}),
         description: z.string().max(100,"Descrição pode ter no máximo 100 letras.").optional(),
         responsibleId: z.string().optional(),
-        estimatedDate: z.date().optional(),
+        estimatedDate: z.date().optional().nullable(),
     })
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
@@ -71,7 +71,7 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
             title: '',
             description: '',
             responsibleId: '',
-            estimatedDate: undefined,
+            estimatedDate: null,
         },
     });
 
@@ -215,6 +215,8 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
                                                 }
                                                 initialFocus
                                             />
+                                            {field.value &&
+                                                <Button className="m-2" onClick={() => field.onChange(null)}><CalendarX2/></Button>}
                                         </PopoverContent>
                                     </Popover>
                                     <FormDescription>
