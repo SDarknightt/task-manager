@@ -36,15 +36,41 @@ export const taskRouter = createTRPCRouter({
     getTasks: protectedProcedure
         .input(z.object({
             boardId: z.string(),
+            query: z.string().optional(),
+            startDate: z.date().optional(),
+            endDate: z.date().optional(),
             disabled: z.boolean().optional().default(false)
         }))
         .query(async ({input, ctx}) => {
             try{
+                const where = {
+                    boardId: input.boardId,
+                    disabled: input.disabled
+                };
+
+                if (input.query) {
+                    Object.assign(where, {
+                        OR: [
+                            {
+                                title:{
+                                    contains: input.query,
+                                    mode: "insensitive"
+                                }
+                            },
+                            {
+                                responsible: {
+                                    name: {
+                                        contains: input.query,
+                                        mode: "insensitive"
+                                    }
+                                }
+                            }
+                        ]
+                    })
+                }
+
                 const responseTask = await ctx.db.task.findMany({
-                    where: {
-                        boardId: input.boardId,
-                        disabled: input.disabled
-                    },
+                    where: where,
                     include:{
                        responsible: true
                     }
@@ -111,6 +137,8 @@ export const taskRouter = createTRPCRouter({
                     },
                     data: {
                         disabled: true,
+                        status: "DONE",
+                        endDate: new Date(),
                     },
                 });
                 return responseTask;
