@@ -68,6 +68,22 @@ export const taskRouter = createTRPCRouter({
                         ]
                     })
                 }
+                if(input.startDate && input.endDate){
+                    Object.assign(where, {
+                        AND: [
+                            {
+                                endDate: {
+                                    gte: input.startDate
+                                }
+                            },
+                            {
+                                endDate: {
+                                    lte: input.endDate
+                                }
+                            }
+                        ]
+                    })
+                }
 
                 const responseTask = await ctx.db.task.findMany({
                     where: where,

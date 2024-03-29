@@ -125,8 +125,10 @@ export function TasksLog({board}:{board: Board}) {
     const [query, setQuery] = useState("");
     const debouncedSearch = useDebounce(query, 500);
     const apiContext = api.useContext();
+    const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+    const [endDate, setEndDate] = useState<Date | undefined>(undefined);
     const fetchDisabledTasks = async () => {
-        const tasks = await apiContext.task.getTasks.fetch({boardId: board.id, disabled: true, query: query});
+        const tasks = await apiContext.task.getTasks.fetch({boardId: board.id, disabled: true, query: query, startDate: startDate, endDate: endDate});
         if(tasks){
             setTasks(tasks);
         }
@@ -135,7 +137,6 @@ export function TasksLog({board}:{board: Board}) {
         void fetchDisabledTasks();
         const pooling = setInterval(() => {
             void fetchDisabledTasks();
-            console.log("pooling disabled")
         }, 5000);
 
         debouncedSearch ? setQuery(query) : '';
@@ -143,7 +144,7 @@ export function TasksLog({board}:{board: Board}) {
         return () => {
             clearInterval(pooling);
         }
-    }, [debouncedSearch]);
+    }, [debouncedSearch, startDate, endDate]);
 
     return (
         <div className="h-full flex flex-col justify-start align-middle items-center p-2">
@@ -151,13 +152,13 @@ export function TasksLog({board}:{board: Board}) {
                 <div className="flex-1">
                     <div className="flex-initial w-80">
                         <Label htmlFor="query">Filtro de busca</Label>
-                        <Input type="text" id="query" placeholder="Filtro" onChange={e => {
+                        <Input type="text" id="query" className="mb-2" placeholder="Filtro" onChange={e => {
                             setQuery(e.target.value)
                         }}/>
                     </div>
                 </div>
                 <div className={"flex-1 flex items-end justify-end pr-3"}>
-                    <DatePickerWithRange/>
+                    <DatePickerWithRange setEndDate={setEndDate} setStartDate={setStartDate}/>
                 </div>
             </div>
 
@@ -195,17 +196,23 @@ export function TasksLog({board}:{board: Board}) {
         </div>
     )
 }
-
 export function DatePickerWithRange({
-                                       className,
-                                   }: React.HTMLAttributes<HTMLDivElement>) {
+                                        className, setStartDate, setEndDate
+                                    }: React.HTMLAttributes<HTMLDivElement> & { setStartDate: React.Dispatch<React.SetStateAction<Date | undefined>>, setEndDate: React.Dispatch<React.SetStateAction<Date | undefined>> }) {
     const [date, setDate] = React.useState<DateRange | undefined>({
         from: subDays(new Date(), 15),
         to:new Date(),
     })
 
+    useEffect(() => {
+        if (date) {
+            setStartDate(date.from);
+            setEndDate(date.to);
+        }
+    }, [date]);
+
     return (
-        <div className={cn("grid gap-2", className)}>
+        <div className={cn("grid gap-2 mb-2", className)}>
             <Popover>
                 <PopoverTrigger asChild>
                     <Button
@@ -224,7 +231,7 @@ export function DatePickerWithRange({
                                     {format(date.to, "dd/MM/yyyy")}
                                 </>
                             ) : (
-                                format(date.from, "LLL dd, y")
+                                format(date.from, "dd/MM/yyyy")
                             )
                         ) : (
                             <span>Selecione o Intervalo</span>
