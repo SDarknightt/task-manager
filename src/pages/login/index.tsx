@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "~/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
+import Loading from "~/components/shared/loading/loading";
 
 export default function AuthHandler(props: {children: React.ReactNode}) {
     const session = useSession();
@@ -15,7 +16,7 @@ export default function AuthHandler(props: {children: React.ReactNode}) {
         return (
             <div className="flex flex-col justify-center items-center h-screen">
                 <div className="flex flex-col items-center">
-                    <p className="text-foreground text-lg font-semibold">Carregando...</p>
+                    <Loading/>
                 </div>
             </div>
         );

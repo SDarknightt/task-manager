@@ -31,7 +31,7 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTas
                 </DialogHeader>
                 <div className="flex flex-col justify-start min-h-[300px]">
 
-                    <Card className="w-full h-full">
+                    <Card className="w-full h-full flex flex-col">
                         <CardHeader>
                             <CardTitle>{taskUpdate.title}</CardTitle>
                             <Separator/>
@@ -63,8 +63,11 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTas
                                 : <></>}
                             <div className=" mt-3 rounded-lg p-2 flex-wrap items-center">
                                 <div className="grid w-full gap-1.5">
-                                    <Label htmlFor="description">Descrição</Label>
-                                    <p className="break-words max-w-[300px]">{taskUpdate?.description}</p>
+                                    { taskUpdate?.description &&
+                                     <>
+                                        <Label htmlFor="description">Descrição</Label>
+                                        <p className="break-words max-w-[300px]">{taskUpdate?.description}</p>
+                                     </>}
                                 </div>
                             </div>
                         </CardContent>

@@ -24,12 +24,12 @@ export function AlertRemoveTask({task, onClose, fetchTasks}: { task: Task, onClo
             fetchTasks();
             toast({
                 title: "Sucesso!",
-                description: "Tarefa archivada com sucesso.",
+                description: "Tarefa arquivada com sucesso.",
             })
         } else {
             toast({
                 title: "Erro!",
-                description: "Erro ao archivar tarefa.",
+                description: "Erro ao arquivar tarefa.",
             })
         }
     }
@@ -69,7 +69,7 @@ export function AlertRemoveTask({task, onClose, fetchTasks}: { task: Task, onClo
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancelar</AlertDialogCancel>
                     <Button variant={"destructive"} onClick={() => deleteTask(task.id)}><Trash className={"mr-2"}/>Deletar</Button>
-                    <Button variant={"secondary"} className={"bg-yellow-500 text-white"} onClick={() => disableTask(task.id)}><Archive className={"mr-2"}/>Arquivar</Button>
+                    <Button variant={"yellow"}  onClick={() => disableTask(task.id)}><Archive className={"mr-2"}/>Arquivar</Button>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
