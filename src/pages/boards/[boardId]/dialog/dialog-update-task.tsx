@@ -105,7 +105,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
                                         <Input{...field}/>
                                     </FormControl>
                                     <FormDescription>
-                                        Título para identificar a tarefa.
+                                        Título para identificação da tarefa
                                     </FormDescription>
                                     <FormMessage/>
                                 </FormItem>
@@ -121,7 +121,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
                                         <Textarea className="text-foreground" id="description" {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Descreva sobre o que se trata o tarefa.
+                                        Descreva sobre o que se trata o tarefa
                                     </FormDescription>
                                     <FormMessage/>
                                 </FormItem>
@@ -197,7 +197,7 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
                                         </PopoverContent>
                                     </Popover>
                                     <FormDescription>
-                                        Selecione a data estimada para finalização da tarefa.
+                                        Data estimada para finalização da tarefa
                                     </FormDescription>
                                     <FormMessage/>
                                 </FormItem>

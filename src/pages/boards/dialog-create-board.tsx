@@ -79,10 +79,10 @@ export default function DialogCreateBoard({isOpen, onClose, fetchBoards}:{isOpen
                                 <FormItem>
                                     <FormLabel>Título</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Insira o título..." {...field} />
+                                        <Input placeholder="Insira o título" {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Título para identificar o quadro.
+                                        Título para identificação do quadro
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -98,7 +98,7 @@ export default function DialogCreateBoard({isOpen, onClose, fetchBoards}:{isOpen
                                         <Textarea className="text-foreground" id="description" placeholder={"Insira a descrição"} {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Descreva sobre o que se trata o quadro.
+                                        Descreva sobre o que se trata o quadro
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>

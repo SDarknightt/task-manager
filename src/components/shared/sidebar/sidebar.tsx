@@ -26,19 +26,19 @@ const sidebarItems: SidebarItems = {
             label: 'Minhas Tarefas',
         },
     ],
-    extras: (
-        <div className='flex flex-col gap-2'>
-            <SidebarButton icon={MoreHorizontal} className='w-full'>
-                Mais
-            </SidebarButton>
-            <SidebarButton
-                className='w-full justify-center text-white'
-                variant='default'
-            >
-                <span className="flex items-center"><Plus className="font-bold"/>Tarefa</span>
-            </SidebarButton>
-        </div>
-    ),
+    // extras: (
+    //     <div className='flex flex-col gap-2'>
+    //         <SidebarButton icon={MoreHorizontal} className='w-full'>
+    //             Mais
+    //         </SidebarButton>
+    //         <SidebarButton
+    //             className='w-full justify-center text-white'
+    //             variant='default'
+    //         >
+    //             <span className="flex items-center"><Plus className="font-bold"/>Tarefa</span>
+    //         </SidebarButton>
+    //     </div>
+    // ),
 };
 
 export default function Sidebar(){

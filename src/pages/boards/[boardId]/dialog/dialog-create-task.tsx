@@ -121,10 +121,10 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
                                 <FormItem>
                                     <FormLabel>Título</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Insira o título..." {...field} />
+                                        <Input placeholder="Insira o título" {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Título para identificar a tarefa.
+                                        Título para identificação da tarefa
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -140,7 +140,7 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
                                         <Textarea className="text-foreground" placeholder={"Insira a descrição"} {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Descreva sobre o que se trata o tarefa.
+                                        Descreva sobre o que se trata o tarefa
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -220,7 +220,7 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
                                         </PopoverContent>
                                     </Popover>
                                     <FormDescription>
-                                        Selecione a data estimada para finalização da tarefa.
+                                        Data estimada para finalização da tarefa
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
