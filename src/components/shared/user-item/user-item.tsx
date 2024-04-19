@@ -34,7 +34,7 @@ export default function UserItem(){
                 { sessionData?.user?.image ?
                     <p>
                         <Avatar>
-                            <AvatarImage className="rounded-[40px]" src={sessionData?.user?.image}/>
+                            <AvatarImage className="rounded-[40px]" src={sessionData?.user?.image ? sessionData?.user?.image : undefined}/>
                             <AvatarFallback>{sessionData?.user?.name?.charAt(0)}</AvatarFallback>
                         </Avatar>
                     </p> :
@@ -70,7 +70,7 @@ export function DialogUserItem({onClose}: DialogUserItemProps) {
                         <div className="justify-self-center">
                             <Avatar className={"min-h-[80px] min-w-[80px]"}>
                                 <AvatarImage className="rounded-[40px] min-h-2 min-w-2 object-cover"
-                                             src={sessionData?.user?.image}/>
+                                             src={sessionData?.user?.image ? sessionData?.user?.image : undefined}/>
                                 <AvatarFallback>{sessionData?.user?.name?.charAt(0)}</AvatarFallback>
                             </Avatar>
                         </div>

@@ -51,7 +51,7 @@ export function HeaderPage({board, pageName, refetchBoard}: {board?: Board, page
                 { users.length > 0 ? users.map((user) => (
                     <li key={user?.id} className="max-w-[36px] max-h-[36px]">
                         <Avatar>
-                            <AvatarImage className="rounded-[40px]" src={user?.image}/>
+                            <AvatarImage className="rounded-[40px]" src={user?.image ? user?.image : undefined}/>
                         </Avatar>
                     </li>
                  )) : <></>
