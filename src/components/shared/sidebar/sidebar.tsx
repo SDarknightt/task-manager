@@ -31,6 +31,7 @@ const sidebarItems: SidebarItems = {
 export default function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const sidebarRef = useRef<HTMLDivElement>(null);
+    const touchStartX = useRef<number | null>(null);
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -39,6 +40,22 @@ export default function Sidebar() {
     const handleClickOutside = (event: MouseEvent) => {
         if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
             setIsSidebarOpen(false);
+        }
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+        // @ts-ignore
+        touchStartX.current = event.touches[0].clientX;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+        if (touchStartX.current !== null) {
+            // @ts-ignore
+            const touchEndX = event.touches[0].clientX;
+            if (touchStartX.current < 50 && touchEndX - touchStartX.current > 50) {
+                setIsSidebarOpen(true);
+                touchStartX.current = null;
+            }
         }
     };
 
@@ -54,9 +71,19 @@ export default function Sidebar() {
         };
     }, [isSidebarOpen]);
 
+    useEffect(() => {
+        document.addEventListener('touchstart', handleTouchStart);
+        document.addEventListener('touchmove', handleTouchMove);
+
+        return () => {
+            document.removeEventListener('touchstart', handleTouchStart);
+            document.removeEventListener('touchmove', handleTouchMove);
+        };
+    }, []);
+
     return (
         <div className="relative min-h-screen">
-            <button onClick={toggleSidebar} className="p-2 top-4 left-4 z-50">
+            <button onClick={toggleSidebar} className="p-2 top-4 left-4 z-50 sm:block hidden">
                 {isSidebarOpen ? <PanelLeftClose /> : <PanelLeftOpen />}
             </button>
             {isSidebarOpen && (
