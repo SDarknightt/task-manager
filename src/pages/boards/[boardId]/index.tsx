@@ -29,6 +29,8 @@ import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {DateRange} from "react-day-picker";
 import {cn} from "~/lib/utils";
 import {toast} from "~/components/ui/use-toast";
+import {HeaderTemplate, MainContent, SubContent} from "~/components/shared/shared-pages/page-components";
+import Page from "~/components/shared/shared-pages/page";
 
 export default function BoardDetails() {
     const router = useRouter();
@@ -94,29 +96,31 @@ export default function BoardDetails() {
 
     return isLoading ?
         <Loading/> :
-        <div>
-            <h2 className="text-lg font-bold m-5 "><HeaderPage board={board} refetchBoard={fetchBoard}/></h2>
-            <div className="flex justify-end mr-5">
-                <Button variant="default" className="mt-10 ml-10" onClick={() => setIsDialogOpen(true)}><Plus/> Tarefa</Button>
-                {isDialogOpen && board && <DialogCreateTask board={board} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} fetchTasks={fetchTasks}/>}
-            </div>
-            <div className="h-full flex align-middle p-2">
-                <div className="h-full w-full flex flex-col align-middle p-2 justify-center">
-                    <Tabs defaultValue="kanban" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2">
-                            <TabsTrigger value="kanban">Kanban</TabsTrigger>
-                            <TabsTrigger value="log">Estatísticas</TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="kanban" defaultChecked>
-                            <Kanban tasks={tasks} fetchTasks={fetchTasks} users={users}/>
-                        </TabsContent>
-                        <TabsContent value="log">
-                            <TasksLog board={board}/>
-                        </TabsContent>
-                    </Tabs>
+        <Page>
+            <HeaderTemplate>
+                <HeaderPage board={board} refetchBoard={fetchBoard}/>
+            </HeaderTemplate>
+            <SubContent>
+                <div className="flex w-full justify-end">
+                    <Button variant="default" className="justify-end sm:mx-0 mx-4" onClick={() => setIsDialogOpen(true)}><Plus/> Tarefa</Button>
+                    {isDialogOpen && board && <DialogCreateTask board={board} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} fetchTasks={fetchTasks}/>}
                 </div>
-            </div>
-        </div>
+            </SubContent>
+            <MainContent>
+                <Tabs defaultValue="kanban" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="kanban">Kanban</TabsTrigger>
+                        <TabsTrigger value="log">Estatísticas</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="kanban" defaultChecked>
+                        <Kanban tasks={tasks} fetchTasks={fetchTasks} users={users}/>
+                    </TabsContent>
+                    <TabsContent value="log">
+                        <TasksLog board={board}/>
+                    </TabsContent>
+                </Tabs>
+            </MainContent>
+        </Page>
 }
 
 
@@ -169,22 +173,24 @@ export function TasksLog({board}:{board: Board}) {
     }, [debouncedSearch, startDate, endDate]);
 
     return (
-        <div className="h-full flex flex-col justify-start align-middle items-center p-2">
-            <div className="flex w-full justify-between">
-                <div className="flex-1">
-                    <div className="flex-initial w-80">
+        <div className=" h-full flex flex-col justify-start align-middle items-center">
+            <div className="flex sm:flex-row flex-col w-full sm:justify-between">
+                <div className="flex flex-1 items-center">
+                    <div className="w-full mx-2 sm:w-3/5 sm:mx-0">
                         <Label htmlFor="query">Filtro de busca</Label>
                         <Input type="text" id="query" className="mb-2" placeholder="Filtro" onChange={e => {
                             setQuery(e.target.value)
                         }}/>
                     </div>
                 </div>
-                <div className={"flex-1 flex items-end justify-end pr-3"}>
-                    <DatePickerWithRange setEndDate={setEndDate} setStartDate={setStartDate}/>
+                <div className={"flex flex-1 justify-end"}>
+                    <div className={"w-3/5 sm:mx-0 mx-2 "}>
+                        <DatePickerWithRange setEndDate={setEndDate} setStartDate={setStartDate}/>
+                    </div>
                 </div>
             </div>
 
-            <div className="w-full">
+            <div className="w-full mt-3 h-screen">
                 <Table className="items-center rounded-md">
                     <TableCaption>Lista de tarefas finalizadas</TableCaption>
                     <TableHeader>
@@ -217,6 +223,7 @@ export function TasksLog({board}:{board: Board}) {
         </div>
     )
 }
+
 export function DatePickerWithRange({
                                         className, setStartDate, setEndDate
                                     }: React.HTMLAttributes<HTMLDivElement> & { setStartDate: React.Dispatch<React.SetStateAction<Date | undefined>>, setEndDate: React.Dispatch<React.SetStateAction<Date | undefined>> }) {
@@ -240,7 +247,7 @@ export function DatePickerWithRange({
                         id="date"
                         variant={"outline"}
                         className={cn(
-                            "w-[300px] justify-start text-left font-normal",
+                            "w-full justify-start text-left font-normal",
                             !date && "text-muted-foreground"
                         )}
                     >
