@@ -6,6 +6,8 @@ import * as React from "react";
 import Loading from "~/components/shared/loading/loading";
 import {Kanban} from "src/components/shared/kanban-board";
 import {HeaderPage} from "src/components/shared/header-page";
+import {HeaderTemplate, MainContent, SubContent} from "~/components/shared/shared-pages/page-components";
+import Page from "~/components/shared/shared-pages/page";
 
 export default function MyTasks() {
     const router = useRouter();
@@ -40,12 +42,16 @@ export default function MyTasks() {
 
     return isLoading ?
         <Loading/> :
-        <div>
-            <h2 className="text-lg font-bold m-5 "><HeaderPage pageName={"Minhas Tarefas"}/></h2>
-            <div className="h-full flex align-middle p-2">
-                <div className="h-full w-full flex flex-col align-middle p-2 justify-center">
-                    <Kanban tasks={tasks} fetchTasks={fetchTasks}/>
+        <Page>
+            <HeaderTemplate>
+                <HeaderPage pageName={"Minhas Tarefas"}/>
+            </HeaderTemplate>
+            <SubContent>
+                <div className="flex w-full justify-end">
                 </div>
-            </div>
-        </div>
+            </SubContent>
+            <MainContent>
+                <Kanban tasks={tasks} fetchTasks={fetchTasks}/>
+            </MainContent>
+        </Page>
 }

@@ -40,10 +40,12 @@ export function HeaderPage({board, pageName, refetchBoard}: {board?: Board, page
             <div className="flex items-center">
                 {board ?
                     <>
-                        <h4 className="text-4xl font-bold text-foreground">{board?.title}</h4>
-                        <Button variant={"ghost"} onClick={()=> setIsDialogOpen(true)}><EditIcon className="w-8 h-8 text-foreground shadow-xl"/></Button>
+                        <h4 className="md:text-4xl text-2xl font-bold text-foreground">{board?.title}</h4>
+                        <Button variant={"ghost"} onClick={()=> setIsDialogOpen(true)}>
+                            <EditIcon className="w-8 h-8 text-foreground shadow-xl"/>
+                        </Button>
                     </>
-                    : <h4 className="text-4xl font-bold text-foreground">{pageName}</h4>
+                    : <h4 className="md:text-4xl text-2xl font-bold text-foreground">{pageName}</h4>
                 }
             </div>
 
@@ -64,7 +66,8 @@ export function HeaderPage({board, pageName, refetchBoard}: {board?: Board, page
                     : <></>
                 }
             </ul>
-            {isDialogOpen && refetchBoard && board && <DialogUpdateBoard refetchBoard={refetchBoard} board={board} users={users} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
+            {isDialogOpen && refetchBoard && board &&
+                <DialogUpdateBoard refetchBoard={refetchBoard} board={board} users={users} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}/>}
         </div>
     );
 }
