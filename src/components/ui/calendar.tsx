@@ -4,7 +4,6 @@ import * as React from "react"
 
 import { cn } from "~/lib/utils"
 import {buttonVariants} from "~/components/ui/button";
-import {ChevronLeftIcon, ChevronRightIcon} from "lucide-react";
 import {DayPicker} from "react-day-picker";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
@@ -58,10 +57,6 @@ function Calendar({
                     "aria-selected:bg-accent aria-selected:text-accent-foreground",
                 day_hidden: "invisible",
                 ...classNames,
-            }}
-            components={{
-                IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
-                IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />,
             }}
             {...props}
         />
