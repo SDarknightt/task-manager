@@ -27,10 +27,15 @@ const MyApp: AppType<{ session: Session | null }> = ({
                   </Head>
                   <main className="main-container">
                       <HeaderComponent/>
-                      <div className="flex flex-1">
-                          <Sidebar/>
-                          <div className="content-container bg-background text-foreground w-full">
-                              <Component { ...pageProps}/>
+
+                      <div className="flex flex-row justify-center">
+                          <div className="">
+                              <Sidebar/>
+                          </div>
+
+                          <div
+                              className="content-container bg-background text-foreground w-full sm:max-w-[80%]">
+                              <Component {...pageProps}/>
                               <Toaster/>
                           </div>
                       </div>
