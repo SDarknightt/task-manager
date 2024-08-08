@@ -1,4 +1,4 @@
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
+import {Card, CardHeader, CardTitle} from "~/components/ui/card";
 import * as React from "react";
 import {Board} from "~/utils/types";
 import {Separator} from "~/components/ui/separator";

@@ -20,7 +20,7 @@ interface DataTableProps<TData> {
     board: Board
 }
 
-export function UsersTable<TData, TValue>({ data, board }: DataTableProps<TData>) {
+function UsersTable<TData extends User>({ data, board }: DataTableProps<TData>) {
 
     const userMutation = api.user.removeUserBoard.useMutation();
 
@@ -42,7 +42,7 @@ export function UsersTable<TData, TValue>({ data, board }: DataTableProps<TData>
         }
     }
 
-    const columns: ColumnDef<User>[] = [
+    const columns: ColumnDef<TData>[] = [
         {
             accessorKey: "name",
             header: "Nome",
@@ -115,3 +115,5 @@ export function UsersTable<TData, TValue>({ data, board }: DataTableProps<TData>
         </div>
     )
 }
+
+export default UsersTable;

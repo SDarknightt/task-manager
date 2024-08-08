@@ -15,10 +15,10 @@ import {CalendarIcon, Pen} from "lucide-react";
 import {Button} from "~/components/ui/button";
 import {Label} from "~/components/ui/label";
 import {useState} from "react";
-import {DialogUpdateTask} from "~/pages/boards/[boardId]/dialog/dialog-update-task";
-import {AlertRemoveTask} from "~/pages/boards/[boardId]/dialog/alert-remove-task";
+import DialogUpdateTask from "~/pages/boards/[boardId]/dialog/dialog-update-task";
+import AlertRemoveTask from "~/pages/boards/[boardId]/dialog/alert-remove-task";
 
-export function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTasks}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void, fetchTasks: () => void}) {
+function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTasks}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void, fetchTasks: () => void}) {
     const [isDialogUpdateOpen, setIsDialogUpdateOpen] = useState(false);
 
     return (
@@ -41,7 +41,7 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTas
                                 <div className="flex justify-between">
                                     <span className="flex justify-end items-center">
                                         <Avatar className="w-[30px] h-[30px]">
-                                            <AvatarImage src={taskUpdate?.responsible?.image}/>
+                                            <AvatarImage src={taskUpdate?.responsible?.image ?? undefined} />
                                         </Avatar>
                                         <p className="text-sm text-foreground px-2 overflow-hidden whitespace-nowrap overflow-ellipsis">
                                             {taskUpdate?.responsible?.name}
@@ -90,3 +90,5 @@ export function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTas
         </Dialog>
     );
 }
+
+export default DialogTasktDetails;

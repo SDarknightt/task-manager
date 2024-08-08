@@ -1,4 +1,4 @@
-import {Github, Moon, Sun} from "lucide-react";
+import {Github} from "lucide-react";
 import {useEffect, useState} from "react";
 import {useTheme} from "next-themes";
 import { Menubar } from "~/components/ui/menubar";

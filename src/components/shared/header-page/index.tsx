@@ -6,7 +6,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {api} from "~/utils/api";
 import DialogInsertUser from "~/pages/boards/[boardId]/dialog/dialog-insert-user";
-import {DialogUpdateBoard} from "~/pages/boards/dialog-update-board";
+import DialogUpdateBoard from "~/pages/boards/dialog-update-board";
 
 export function HeaderPage({board, pageName, refetchBoard}: {board?: Board, pageName?: string, refetchBoard?: () => void}){
     const apiContext = api.useContext();

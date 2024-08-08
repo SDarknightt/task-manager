@@ -30,7 +30,7 @@ type FormValues = {
     estimatedDate?: Date | null;
 }
 
-export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDialogDetails, fetchTasks}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void, onCloseDialogDetails: () => void, fetchTasks: () => void}) {
+function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDialogDetails, fetchTasks}: {taskUpdate: Task, users?: User[], isOpen: boolean, onClose: () => void, onCloseDialogDetails: () => void, fetchTasks: () => void}) {
     const apiMutation = api.task.updateTask.useMutation();
 
     const formSchema = z.object({
@@ -40,6 +40,13 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
         responsibleId: z.string().optional(),
         estimatedDate: z.date().optional().nullable(),
     })
+
+    const convertToMatcher = (date: Date | null | undefined): Date | undefined => {
+        if (date === null || date === undefined) {
+            return undefined;
+        }
+        return date;
+    };
 
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
@@ -185,12 +192,10 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
                                         <PopoverContent className="w-auto p-0" align="start">
                                             <Calendar
                                                 mode="single"
-                                                selected={field.value}
+                                                selected={convertToMatcher(field.value)}
                                                 onSelect={field.onChange}
-                                                disabled={(date) =>
-                                                    date < new Date()
-                                                }
-                                                initialFocus
+                                                disabled={(date) => date < new Date()}
+                                                initialFocus={true}
                                             />
                                             {field.value &&
                                             <Button className="m-2" onClick={() => field.onChange(null)}><CalendarX2/></Button>}
@@ -211,3 +216,5 @@ export function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDia
         </Dialog>
     );
 }
+
+export default DialogUpdateTask;

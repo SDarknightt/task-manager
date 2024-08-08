@@ -16,9 +16,9 @@ import {Input} from "~/components/ui/input";
 import * as React from "react";
 import {Textarea} from "~/components/ui/text-area";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/ui/tabs";
-import {UsersTable} from "~/pages/boards/[boardId]/users-table";
-import {AlertDeleteBoard} from "~/pages/boards/alert-delete-board";
+import AlertDeleteBoard from "~/pages/boards/alert-delete-board";
 import {Pen} from "lucide-react";
+import UsersTable from "~/pages/boards/[boardId]/users-table";
 
 type FormValues = {
     boardId: string;
@@ -26,7 +26,7 @@ type FormValues = {
     description?: string;
 }
 
-export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}: {board: Board, users?: User[], isOpen: boolean, onClose: () => void, refetchBoard: () => void}){
+function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}: {board: Board, users?: User[], isOpen: boolean, onClose: () => void, refetchBoard: () => void}){
     const apiMutation = api.board.updateBoard.useMutation();
     const formSchema = z.object({
         boardId: z.string(),
@@ -126,7 +126,7 @@ export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}:
                         <AlertDeleteBoard board={board}/>
                     </TabsContent>
                     <TabsContent value="users">
-                        <UsersTable data={users} board={board}/>
+                        <UsersTable data={users ?? []} board={board}/>
                     </TabsContent>
                 </Tabs>
 
@@ -134,3 +134,5 @@ export function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}:
         </Dialog>
     );
 }
+
+export default DialogUpdateBoard;

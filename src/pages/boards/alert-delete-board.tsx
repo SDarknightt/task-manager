@@ -13,7 +13,7 @@ import {Button} from "~/components/ui/button";
 import {Trash} from "lucide-react";
 import * as React from "react";
 
-export function AlertDeleteBoard({board}: { board: Board}) {
+function AlertDeleteBoard({board}: { board: Board}) {
     const deleteMutation = api.board.deleteBoard.useMutation();
     const router = useRouter();
     async function deleteBoard() {
@@ -53,3 +53,5 @@ export function AlertDeleteBoard({board}: { board: Board}) {
         </AlertDialog>
     )
 }
+
+export default AlertDeleteBoard;

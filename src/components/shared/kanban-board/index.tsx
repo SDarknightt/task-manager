@@ -7,7 +7,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/c
 import {CalendarIcon, CheckCheck, Clock, RotateCw} from "lucide-react";
 import * as React from "react";
 import {Avatar, AvatarImage} from "~/components/ui/avatar";
-import {DialogTasktDetails} from "~/pages/boards/[boardId]/dialog/dialog-task-details";
+import DialogTasktDetails from "~/pages/boards/[boardId]/dialog/dialog-task-details";
 import {Button} from "~/components/ui/button";
 import {cn} from "~/lib/utils";
 import {format} from "date-fns";

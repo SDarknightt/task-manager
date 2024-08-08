@@ -141,7 +141,7 @@ export function TasksLog({board}:{board: Board}) {
         console.log("taskId", taskId);
         const deleteTask = await deleteMutation.mutateAsync({taskId: taskId});
         if (deleteTask) {
-            fetchDisabledTasks();
+            void fetchDisabledTasks();
             toast({
                 title: "Sucesso!",
                 description: "Tarefa deletada com sucesso.",
@@ -202,7 +202,7 @@ export function TasksLog({board}:{board: Board}) {
                                 <TableCell>{task.title}</TableCell>
                                 <TableCell>{task?.responsible?.name ? task?.responsible?.name : "-" }</TableCell>
                                 <TableCell>{format(task.creationDate, "dd/MM/yyyy")}</TableCell>
-                                <TableCell>{format(task?.endDate, "dd/MM/yyyy")}</TableCell>
+                                <TableCell>{task?.endDate ? format(task.endDate, "dd/MM/yyyy") : "-"}</TableCell>
                                 <TableCell><Button variant={"destructive"} onClick={() => deleteTask(task.id)}><Trash/></Button></TableCell>
                             </TableRow>
                         ))}

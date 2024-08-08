@@ -29,6 +29,7 @@ import {cn} from "~/lib/utils";
 import {CalendarIcon, CalendarX2} from "lucide-react";
 import {Calendar} from "~/components/ui/calendar";
 import {Textarea} from "~/components/ui/text-area";
+import { Matcher } from 'react-day-picker';
 
 type FormValues = {
     title: string;
@@ -42,6 +43,13 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
     const apiMutation = api.task.createTask.useMutation();
     const apiContext = api.useContext();
     const [users, setUsers] = useState([] as User[]);
+
+    const convertToMatcher = (date: Date | null | undefined): Date | undefined => {
+        if (date === null || date === undefined) {
+            return undefined;
+        }
+        return date;
+    };
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -208,12 +216,10 @@ export default function DialogCreateTask({board, isOpen, onClose, fetchTasks} : 
                                         <PopoverContent className="w-auto p-0" align="start">
                                             <Calendar
                                                 mode="single"
-                                                selected={field.value}
+                                                selected={convertToMatcher(field.value)}
                                                 onSelect={field.onChange}
-                                                disabled={(date) =>
-                                                    date < new Date()
-                                                }
-                                                initialFocus
+                                                disabled={(date) => date < new Date()}
+                                                initialFocus={true}
                                             />
                                             {field.value &&
                                                 <Button className="m-2" onClick={() => field.onChange(null)}><CalendarX2/></Button>}

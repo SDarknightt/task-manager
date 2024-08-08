@@ -12,7 +12,7 @@ import {Button} from "~/components/ui/button";
 import {Archive, PackageOpen, Trash} from "lucide-react";
 import * as React from "react";
 
-export function AlertRemoveTask({task, onClose, fetchTasks}: { task: Task, onClose: () => void, fetchTasks: () => void}) {
+function AlertRemoveTask({task, onClose, fetchTasks}: { task: Task, onClose: () => void, fetchTasks: () => void}) {
     const deleteMutation = api.task.deleteTask.useMutation();
 
     const disableMutation = api.task.disableTask.useMutation();
@@ -75,3 +75,5 @@ export function AlertRemoveTask({task, onClose, fetchTasks}: { task: Task, onClo
         </AlertDialog>
     )
 }
+
+export default AlertRemoveTask;
