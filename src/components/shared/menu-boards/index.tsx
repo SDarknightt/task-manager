@@ -14,9 +14,9 @@ export default function MenuBoards({boardsProps}: {boardsProps: Board[]}){
         <>
             {boardsProps.length > 0 ?
                 <div
-                    className="flex flex-column flex-wrap justify-center items-start gap-8 border flex-grow p-10 m-3 overflow-auto w-full rounded-3xl">
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full sm:mx-0 mx-2 mb-3">
                     {boardsProps.map((board) => (
-                        <Card key={board.id} className="min-w-[280px] w-[20%] min-h-[200px] flex-shrink-0 cursor-pointer"
+                        <Card key={board.id} className="w-full min-h-[200px] flex-shrink-0 cursor-pointer"
                               onClick={() => redirect(board.id)}>
                             <CardHeader>
                                 <CardTitle>{board?.title}</CardTitle>
@@ -28,7 +28,6 @@ export default function MenuBoards({boardsProps}: {boardsProps: Board[]}){
                 </div>
                 : <div className={"m-12"}>Nenhum quadro foi encontrado...</div>
             }
-
         </>
     );
 }
