@@ -44,13 +44,15 @@ export default function Sidebar() {
     };
 
     const handleTouchStart = (event: TouchEvent) => {
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         touchStartX.current = event.touches[0].clientX;
     };
 
     const handleTouchMove = (event: TouchEvent) => {
         if (touchStartX.current !== null) {
-            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             const touchEndX = event.touches[0].clientX;
             if (touchStartX.current < 50 && touchEndX - touchStartX.current > 50) {
                 setIsSidebarOpen(true);

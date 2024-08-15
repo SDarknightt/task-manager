@@ -62,7 +62,7 @@ export const userRouter = createTRPCRouter({
                     }
                 });
 
-                if(!isAdmin || !isAdmin.admin) {
+                if(!isAdmin?.admin) {
                     throw new Error('User is not admin');
                 }
 

@@ -1,9 +1,6 @@
-import { z } from "zod";
+import {z} from "zod";
 
-import {
-    createTRPCRouter,
-    protectedProcedure,
-} from "~/server/api/trpc";
+import {createTRPCRouter, protectedProcedure,} from "~/server/api/trpc";
 import {Board, User} from "~/utils/types";
 
 export const boardRouter = createTRPCRouter({
@@ -14,7 +11,7 @@ export const boardRouter = createTRPCRouter({
         }))
         .mutation(async ({input, ctx}) => {
             try{
-                const newBoard = await ctx.db.board.create({
+                return await ctx.db.board.create({
                     data: {
                         title: input.title,
                         description: input.description,
@@ -26,7 +23,6 @@ export const boardRouter = createTRPCRouter({
                         },
                     },
                 }) as Board;
-                return newBoard;
             }catch (error) {
                 throw new Error('Error creating board');
             }
@@ -127,7 +123,7 @@ export const boardRouter = createTRPCRouter({
                     }
                 });
 
-                if(!isAdmin || !isAdmin.admin) {
+                if(!isAdmin?.admin) {
                     throw new Error('User is not admin');
                 }
 

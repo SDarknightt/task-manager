@@ -9,7 +9,7 @@ export default function AuthHandler(props: {children: React.ReactNode}) {
     const session = useSession();
 
     if (session.status === 'authenticated') {
-            return props.children as React.ReactNode;
+            return props.children;
     }
 
     if (session.status === 'loading') {
