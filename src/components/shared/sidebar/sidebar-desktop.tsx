@@ -7,6 +7,7 @@ import {SidebarItems} from "~/utils/types";
 
 interface SidebarDesktopProps {
     sidebarItems: SidebarItems;
+    onLinkClick: (href: string) => void;
 }
 
 export function SidebarDesktop(props: SidebarDesktopProps) {
