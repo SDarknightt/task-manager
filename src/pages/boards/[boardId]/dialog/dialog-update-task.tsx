@@ -148,7 +148,7 @@ function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDialogDeta
                                         </FormControl>
                                         <SelectContent className="max-h-60 overflow-y-auto">
                                             <SelectItem key={"without"} value={"without"}>
-                                                Sem responsável
+                                                Nenhum
                                             </SelectItem>
                                             {users?.map((user: User) => {
                                                 return (
@@ -194,7 +194,7 @@ function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDialogDeta
                                                 mode="single"
                                                 selected={convertToMatcher(field.value)}
                                                 onSelect={field.onChange}
-                                                disabled={(date) => date < new Date()}
+                                                disabled={(date) => date.getTime() < new Date().setHours(0, 0, 0, 0)} 
                                                 initialFocus={true}
                                             />
                                             {field.value &&

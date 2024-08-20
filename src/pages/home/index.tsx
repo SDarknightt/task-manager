@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Board, Task} from "~/utils/types";
 import {useRouter} from "next/router";
 import MenuBoards from "~/components/shared/menu-boards";
-import {CheckCheck, Clock, RotateCw} from "lucide-react";
+import {CheckCheck, Clock, RotateCw, SquareKanban} from "lucide-react";
 import Page from "~/components/shared/shared-pages/page";
 import {
     HeaderTemplate,
@@ -13,6 +13,7 @@ import {
 } from "~/components/shared/shared-pages/page-components";
 import {HeaderPage} from "~/components/shared/header-page";
 import StatusCard from "~/components/shared/shared-components/card-status";
+import {Card, CardTitle} from "~/components/ui/card";
 
 export default function Home() {
     const [boards, setBoards] = useState([] as Board[]);
@@ -92,11 +93,19 @@ export function StatusTaks({tasks}: {tasks: Task[]}){
     }, []);
 
     return (
-        <div className="flex select-none w-full flex-col space-y-3
+        <div className={"flex flex-col w-full"}>
+            <div className="flex select-none w-full flex-col space-y-3
             sm:justify-between sm:flex-row sm:items-center">
-            <StatusCard title="Para Fazer" icon={<Clock className="inline-block mr-2 text-red-500" />} value={taskToDo} />
-            <StatusCard title="Fazendo" icon={<RotateCw className="inline-block mr-2 text-yellow-500" />} value={taskDoing} />
-            <StatusCard title="Feitas" icon={<CheckCheck className="inline-block mr-2 text-green-500" />} value={taskDone} />
+                <StatusCard title="Para Fazer" icon={<Clock className="inline-block mr-2 text-red-500"/>}
+                            value={taskToDo}/>
+                <StatusCard title="Fazendo" icon={<RotateCw className="inline-block mr-2 text-yellow-500"/>}
+                            value={taskDoing}/>
+                <StatusCard title="Feitas" icon={<CheckCheck className="inline-block mr-2 text-green-500"/>}
+                            value={taskDone}/>
+            </div>
+            <Card className="sm:min-w-[30%] sm:mx-0 mx-2 h-full p-2 mt-3">
+                <CardTitle className={"flex flex-row"}> <SquareKanban className={"mr-2"}/> Lista de Quadros</CardTitle>
+            </Card>
         </div>
     );
 }

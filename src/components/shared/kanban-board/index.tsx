@@ -27,7 +27,7 @@ export function Kanban ({tasks, fetchTasks, users}: {tasks: Task[], fetchTasks: 
     }, [tasks]);
 
     return (
-        <div className="flex overflow-x-auto w-full sm:mx-0 mx-2 mb-3">
+        <div className="flex overflow-x-auto w-full sm:mx-0 mx-2 mb-3 min-h-screen">
             <div className="flex flex-nowrap w-full">
                 <TaskColumn tasks={taskToDo} title="Para Fazer" color="red" updateTaskStatus={updateTaskStatus} setIsDialogOpen={setIsDialogOpen} setSelectedTask={setSelectedTask} />
                 <TaskColumn tasks={taskDoing} title="Fazendo" color="yellow" updateTaskStatus={updateTaskStatus} setIsDialogOpen={setIsDialogOpen} setSelectedTask={setSelectedTask} />

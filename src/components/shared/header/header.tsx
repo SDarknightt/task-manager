@@ -33,6 +33,7 @@ import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {api} from "~/utils/api";
 
 import * as React from "react";
+import {useRouter} from "next/router";
 
 interface HeaderProps {
     isSidebarOpen: boolean;
@@ -42,7 +43,7 @@ interface HeaderProps {
 export default function Header({ isSidebarOpen, toggleSidebar }: HeaderProps) {
     const { theme, setTheme } = useTheme();
     const [filter, setFilter]  = useState('none')
-
+    const router = useRouter();
     useEffect(() => {
         theme === 'light' ? setFilter(() => 'invert(95%)') : setFilter(() => '')
     }, [theme, filter])
@@ -50,7 +51,7 @@ export default function Header({ isSidebarOpen, toggleSidebar }: HeaderProps) {
     return (
         <Menubar className="menu-header rounded-none px-2 border-l-0 border-r-0 border-t-0 border-b  lg:px-4 p-8">
             <div className="flex justify-start">
-                <div className="flex flex-row self-center ml-2">
+                <div className="flex flex-row self-center ml-2" onClick={() => router.push('/')}>
                     <Image
                         src="/assets/logo.svg"
                         width={80}
@@ -108,7 +109,7 @@ function DropdownHeaderItens() {
                     <Button variant="outline"><MenuIcon/></Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuLabel>Opções</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                         <DropdownMenuItem onClick={handleDialogOpen}>
