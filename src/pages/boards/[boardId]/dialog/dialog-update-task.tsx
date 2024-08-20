@@ -194,7 +194,7 @@ function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDialogDeta
                                                 mode="single"
                                                 selected={convertToMatcher(field.value)}
                                                 onSelect={field.onChange}
-                                                disabled={(date) => date.getTime() < new Date().setHours(0, 0, 0, 0)} 
+                                                disabled={(date) => date.getTime() < new Date().setHours(0, 0, 0, 0)}
                                                 initialFocus={true}
                                             />
                                             {field.value &&

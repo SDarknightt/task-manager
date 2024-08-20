@@ -37,18 +37,18 @@ const TaskColumn: React.FC<TaskColumnProps> = ({tasks, title, color, updateTaskS
                             <Separator className={`bg-${color}-500`}/>
                         </CardHeader>
                         <CardContent>
-                            <div className={"flex justify-between"}>
-                            <span className="flex items-center">
-                                {task?.responsible?.image ?
-                                    <>
-                                        <Avatar className="w-[30px] h-[30px]">
-                                            <AvatarImage src={task?.responsible?.image}/>
-                                        </Avatar>
-                                        <p className="text-sm text-foreground px-2">{task?.responsible?.name}</p>
-                                    </>
-                                    : <></>
-                                }
-                            </span>
+                            <div className={"flex  flex-wrap xl:flex-row justify-between"}>
+                                <div className="flex items-center">
+                                    {task?.responsible?.image ?
+                                        <>
+                                            <Avatar className="w-[30px] h-[30px]">
+                                                <AvatarImage src={task?.responsible?.image}/>
+                                            </Avatar>
+                                            <p className="text-sm text-foreground px-2">{task?.responsible?.name}</p>
+                                        </>
+                                        : <></>
+                                    }
+                                </div>
                                 <div className="flex items-start">
                                     {task.estimatedDate ?
                                         <Button

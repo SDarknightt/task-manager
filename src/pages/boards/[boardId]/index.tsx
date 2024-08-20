@@ -173,7 +173,7 @@ export function TasksLog({board}:{board: Board}) {
     }, [debouncedSearch, startDate, endDate]);
 
     return (
-        <div className=" h-full flex flex-col justify-start align-middle items-center">
+        <div className="flex flex-col justify-start align-middle items-center">
             <div className="flex sm:flex-row flex-col w-full sm:justify-between">
                 <div className="flex flex-1 items-center">
                     <div className="w-full mx-2 sm:w-3/5 sm:mx-0">
@@ -190,8 +190,8 @@ export function TasksLog({board}:{board: Board}) {
                 </div>
             </div>
 
-            <div className="w-full mt-3 h-screen">
-                <Table className="items-center rounded-md">
+            <div className="w-full mt-3">
+                <Table className="items-center rounded-md min-h-screen">
                     <TableCaption>Lista de tarefas finalizadas</TableCaption>
                     <TableHeader>
                         <TableRow>
