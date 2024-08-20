@@ -29,26 +29,26 @@ export default function AuthHandler(props: {children: React.ReactNode}) {
 
 export function SignInPage(){
     return (
-        <main className="h-screen flex w-full">
-            <div className="bg-primary-foreground w-full h-full flex p-16 items-center justify-center">
+        <main className="h-screen flex flex-col lg:flex-row w-full">
+            <div className="bg-primary-foreground w-full lg:w-1/2 h-1/2 lg:h-full flex p-4 lg:p-16 items-center justify-center">
                 <Carousel className="w-full max-w-xl">
                     <CarouselContent>
                         <CarouselItem>
-                            <div className="flex aspect-square rounded p-8">
+                            <div className="flex aspect-square rounded p-4 lg:p-8">
                                 <img src="/assets/amico.svg" alt="Imagem Amico" className="w-full h-full" />
                             </div>
                         </CarouselItem>
                         <CarouselItem>
-                            <div className="flex aspect-square rounded p-8">
+                            <div className="flex aspect-square rounded p-4 lg:p-8">
                                 <img src="/assets/bro.svg" alt="Imagem Amico" className="w-full h-full" />
                             </div>
                         </CarouselItem>
                     </CarouselContent>
-                    <CarouselPrevious/>
-                    <CarouselNext/>
+                    <CarouselPrevious className="hidden sm:block"/>
+                    <CarouselNext className="hidden sm:block"/>
                 </Carousel>
             </div>
-            <section className="flex items-center justify-center bg-background h-full max-w-3xl w-full p-4">
+            <section className="flex items-center justify-center bg-background h-1/2 lg:h-full w-full lg:w-1/2 p-4">
                 <Card className="w-full max-w-md">
                     <CardHeader>
                         <CardTitle className="text-2xl font-bold tracking-tighter flex items-center">
@@ -60,7 +60,7 @@ export function SignInPage(){
                     </CardHeader>
                     <CardContent>
                         <Button className="mt-1 w-full" onClick={() => signIn('discord')}>
-                           <FaDiscord className="mr-2"/> Entrar com Discord
+                            <FaDiscord className="mr-2"/> Entrar com Discord
                         </Button>
                     </CardContent>
                     <CardFooter>

@@ -20,7 +20,7 @@ import {
     DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
 import {Button} from "~/components/ui/button";
-import {useSession} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import {
     Dialog,
     DialogContent,
@@ -138,7 +138,7 @@ function DropdownHeaderItens() {
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className={"text-red-500"}>
+                    <DropdownMenuItem className={"text-red-500"} onClick={() => signOut()}>
                         <LogOut className=" mr-2 h-4 w-4" />
                         <span>Sair</span>
                     </DropdownMenuItem>
