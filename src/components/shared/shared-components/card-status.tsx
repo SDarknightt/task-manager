@@ -6,14 +6,15 @@ interface StatusCardProps {
     title: string;
     icon: React.ReactNode;
     value: number;
+    color: string;
 }
 
-const StatusCard: React.FC<StatusCardProps> = ({ title, icon, value }) => {
+const StatusCard: React.FC<StatusCardProps> = ({ title, icon, value, color }) => {
     return (
         <Card className="sm:min-w-[30%] sm:mx-0 mx-2 h-full">
             <CardHeader className="flex items-center">
                 <CardTitle className={"sm:text-2xl text-lg"}>{title}</CardTitle>
-                <Separator/>
+                <Separator className={`bg-${color}-500`}/>
             </CardHeader>
             <CardContent className="flex justify-center items-center">
                 <h4 className="sm:text-4xl text-2xl font-bold text-foreground">

@@ -27,7 +27,7 @@ const TaskColumn: React.FC<TaskColumnProps> = ({tasks, title, color, updateTaskS
             <div className={"space-y-2 sm:w-[80%] w-full"}>
                 {tasks.map((task) => (
                     <Card key={task.id}
-                        className={`w-full flex-shrink-0 border-${color}-500 cursor-pointer`}
+                        className={`w-full flex-shrink-0 cursor-pointer`}
                         onClick={() => {
                             setIsDialogOpen(true);
                             setSelectedTask(task);

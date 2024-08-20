@@ -96,11 +96,11 @@ export function StatusTaks({tasks}: {tasks: Task[]}){
         <div className={"flex flex-col w-full"}>
             <div className="flex select-none w-full flex-col space-y-3
             sm:justify-between sm:flex-row sm:items-center">
-                <StatusCard title="Para Fazer" icon={<Clock className="inline-block mr-2 text-red-500"/>}
+                <StatusCard color={"red"} title="Para Fazer" icon={<Clock className="inline-block mr-2 text-red-500"/>}
                             value={taskToDo}/>
-                <StatusCard title="Fazendo" icon={<RotateCw className="inline-block mr-2 text-yellow-500"/>}
+                <StatusCard color={"yellow"} title="Fazendo" icon={<RotateCw className="inline-block mr-2 text-yellow-500"/>}
                             value={taskDoing}/>
-                <StatusCard title="Feitas" icon={<CheckCheck className="inline-block mr-2 text-green-500"/>}
+                <StatusCard color={"green"} title="Feitas" icon={<CheckCheck className="inline-block mr-2 text-green-500"/>}
                             value={taskDone}/>
             </div>
             <Card className="sm:min-w-[30%] sm:mx-0 mx-2 h-full p-2 mt-3">
