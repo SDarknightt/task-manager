@@ -96,7 +96,7 @@ function DialogUpdateTask({taskUpdate, users, isOpen, onClose, onCloseDialogDeta
             form.reset();
             onClose();
         }}>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] w-[95%] rounded-md my-3 p-4 pb-12 sm:p-8 overflow-y-auto max-h-[90vh]">
                 <DialogHeader>
                     <DialogTitle>Detalhes da Tarefa</DialogTitle>
                 </DialogHeader>

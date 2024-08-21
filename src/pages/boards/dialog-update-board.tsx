@@ -74,7 +74,7 @@ function DialogUpdateBoard({board, users, isOpen, onClose, refetchBoard}: {board
             form.reset();
             onClose();
         }}>
-            <DialogContent className="max-w-[425px]">
+            <DialogContent className="max-w-[425px] w-[95%] rounded-md">
                 <DialogHeader>
                     <DialogTitle>Detalhes do Quadro</DialogTitle>
                 </DialogHeader>

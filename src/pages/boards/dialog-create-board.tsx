@@ -63,7 +63,7 @@ export default function DialogCreateBoard({isOpen, onClose, fetchBoards}:{isOpen
     }
     return (
         <Dialog open={isOpen} onOpenChange={() => onClose()}>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] w-[95%] rounded-md">
                 <DialogHeader>
                     <DialogTitle>Criar Quadro</DialogTitle>
                     <DialogDescription>
