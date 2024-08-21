@@ -25,7 +25,7 @@ export default function DialogInsertUser({board, fetchUsers} : {board: Board, fe
             <DialogTrigger asChild  className="border border-dashed flex items-center w-9 h-9 border-gray-500 justify-center rounded-full">
                 <Button variant="ghost"><PlusIcon className="w-10 h-10 text-red-600"/>+</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] w-[95%] rounded-md">
                 <DialogHeader>
                     <DialogTitle>Inserir Usúario</DialogTitle>
                     <DialogDescription>
