@@ -160,7 +160,7 @@ export function DialogUserItem({ onClose }: DialogUserItemProps) {
 
     return (
         <Dialog open={true} onOpenChange={onClose}>
-            <DialogContent>
+            <DialogContent className={"w-[95%] rounded-md"}>
                 <DialogHeader>
                     <DialogTitle>Perfil</DialogTitle>
                     <DialogBody>
@@ -203,7 +203,7 @@ export function DialogShareId({ onClose }: DialogShareIdProps) {
 
     return (
         <Dialog open={true} onOpenChange={onClose}>
-            <DialogContent className="flex-col flex items-center">
+            <DialogContent className="flex-col flex items-center w-[95%] rounded-md">
                 <DialogHeader className="flex-col flex items-center">
                     <DialogTitle>Código de convite</DialogTitle>
                     <DialogDescription className="flex-col flex items-center">

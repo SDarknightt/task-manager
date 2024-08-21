@@ -25,13 +25,11 @@ function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTasks}: {t
         <Dialog open={isOpen} onOpenChange={() => {
             onClose();
         }}>
-            <DialogContent className="max-w-[425px] min-h-[400px]">
+            <DialogContent className="max-w-[425px] w-[95%] flex flex-col rounded-md">
                 <DialogHeader>
                     <DialogTitle>Detalhes da Tarefa</DialogTitle>
                 </DialogHeader>
-                <div className="flex flex-col justify-start min-h-[300px]">
-
-                    <Card className="w-full h-full flex flex-col">
+                    <Card className="">
                         <CardHeader>
                             <CardTitle>{taskUpdate.title}</CardTitle>
                             <Separator/>
@@ -61,8 +59,8 @@ function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTasks}: {t
                                     </div>
                                 </div>
                                 : <></>}
-                            <div className=" mt-3 rounded-lg p-2 flex-wrap items-center">
-                                <div className="grid w-full gap-1.5">
+                            <div className=" flex mt-3 rounded-lg items-center">
+                                <div className="flex flex-col w-full gap-1.5">
                                     { taskUpdate?.description &&
                                      <>
                                         <Label htmlFor="description">Descrição</Label>
@@ -82,7 +80,6 @@ function DialogTasktDetails({taskUpdate, users, isOpen, onClose, fetchTasks}: {t
                             </div>
                         </CardFooter>
                     </Card>
-                </div>
                 {isDialogUpdateOpen && taskUpdate &&
                     <DialogUpdateTask taskUpdate={taskUpdate} users={users} isOpen={isDialogUpdateOpen}
                                       onClose={() => setIsDialogUpdateOpen(false)} onCloseDialogDetails={onClose} fetchTasks={fetchTasks}/>}
