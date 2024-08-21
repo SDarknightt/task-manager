@@ -29,15 +29,15 @@ export default function MyTasks() {
     }
 
     useEffect(() => {
-        const pooling = setInterval(() => {
-            void fetchTasks();
-        }, 5000);
+        // const pooling = setInterval(() => {
+        //     void fetchTasks();
+        // }, 5000);
 
         void fetchTasks();
 
-        return () => {
-            clearInterval(pooling);
-        }
+        // return () => {
+        //     clearInterval(pooling);
+        // }
     }, []);
 
     return isLoading ?

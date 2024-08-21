@@ -32,13 +32,13 @@ export default function Boards() {
 
     useEffect(() => {
         void fetchBoard();
-        const pooling = setInterval(() =>{
-            void fetchBoard();
-        }, 5000);
-
-        return () => {
-            clearInterval(pooling);
-        }
+        // const pooling = setInterval(() =>{
+        //     void fetchBoard();
+        // }, 5000);
+        //
+        // return () => {
+        //     clearInterval(pooling);
+        // }
     }, []);
 
     return isLoading ?

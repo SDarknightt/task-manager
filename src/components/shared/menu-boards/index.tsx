@@ -3,6 +3,7 @@ import * as React from "react";
 import {Board} from "~/utils/types";
 import {Separator} from "~/components/ui/separator";
 import {useRouter} from "next/router";
+import {Presentation} from "lucide-react";
 
 export default function MenuBoards({boardsProps}: {boardsProps: Board[]}){
     const router = useRouter();
@@ -19,7 +20,7 @@ export default function MenuBoards({boardsProps}: {boardsProps: Board[]}){
                         <Card key={board.id} className="w-full min-h-[200px] flex-shrink-0 cursor-pointer"
                               onClick={() => redirect(board.id)}>
                             <CardHeader>
-                                <CardTitle>{board?.title}</CardTitle>
+                                <CardTitle className={"flex flex-row"}><Presentation className={"mr-2"}/>{board?.title}</CardTitle>
                                 <Separator/>
                                 <p className="break-words text-gray-400">{board?.description}</p>
                             </CardHeader>

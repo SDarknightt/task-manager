@@ -81,17 +81,22 @@ export default function BoardDetails() {
     }
 
     useEffect(() => {
-        const pooling = setInterval(() => {
-            void fetchTasks();
-        }, 5000);
+        const fetchUsersAndActivatePooling = async () => {
+            await fetchUsers();
+            if (users.length > 1) {
+                const pooling = setInterval(() => {
+                    void fetchTasks();
+                }, 5000);
+
+                return () => {
+                    clearInterval(pooling);
+                }
+            }
+        };
 
         void fetchBoard();
         void fetchTasks();
-        void fetchUsers();
-
-        return () => {
-            clearInterval(pooling);
-        }
+        void fetchUsersAndActivatePooling();
     }, []);
 
     return isLoading ?

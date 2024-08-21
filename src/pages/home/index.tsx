@@ -51,13 +51,13 @@ export default function Home() {
         void fetchBoard();
         void fetchUserTasks();
 
-        const pooling = setInterval(() =>{
-            void fetchBoard();
-        }, 5000);
+        // const pooling = setInterval(() =>{
+        //     void fetchBoard();
+        // }, 5000);
 
-        return () => {
-            clearInterval(pooling);
-        }
+        // return () => {
+        //     clearInterval(pooling);
+        // }
     }, []);
 
 
@@ -100,7 +100,7 @@ export function StatusTaks({tasks}: {tasks: Task[]}){
                             value={taskToDo}/>
                 <StatusCard color={"yellow"} title="Fazendo" icon={<RotateCw className="inline-block mr-2 text-yellow-500"/>}
                             value={taskDoing}/>
-                <StatusCard color={"green"} title="Feitas" icon={<CheckCheck className="inline-block mr-2 text-green-500"/>}
+                <StatusCard color={"green"} title="Feito" icon={<CheckCheck className="inline-block mr-2 text-green-500"/>}
                             value={taskDone}/>
             </div>
             <Card className="sm:min-w-[30%] sm:mx-0 mx-2 h-full p-2 mt-3">
