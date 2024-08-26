@@ -1,7 +1,7 @@
 import { signIn, useSession } from "next-auth/react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
-import { FaDiscord } from "react-icons/fa";
+import { FaDiscord, FaGoogle } from "react-icons/fa";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
 import Loading from "~/components/shared/loading/loading";
 
@@ -61,6 +61,11 @@ export function SignInPage(){
                     <CardContent>
                         <Button className="mt-1 w-full" onClick={() => signIn('discord')}>
                             <FaDiscord className="mr-2"/> Entrar com Discord
+                        </Button>
+                    </CardContent>
+                    <CardContent>
+                        <Button className="mt-1 w-full" onClick={() => signIn('google')}>
+                            <FaGoogle className="mr-2"/> Entrar com Google
                         </Button>
                     </CardContent>
                     <CardFooter>
