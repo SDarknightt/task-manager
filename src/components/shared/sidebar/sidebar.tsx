@@ -46,15 +46,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
     }, [isSidebarOpen]);
 
     return (
-        <div className="relative min-h-screen">
-            {isSidebarOpen && (
-                <div ref={sidebarRef} className="absolute top-0 left-0 w-[300px] min-w-[300px] h-full border-r p-4 bg-background z-40">
-                    <div><UserItem /></div>
-                    <div className="grow">
-                        <SidebarDesktop sidebarItems={sidebarItems} onLinkClick={handleLinkClick} />
-                    </div>
-                </div>
-            )}
+        <div ref={sidebarRef} className={`min-h-screen fixed top-0  w-[300px] min-w-[300px] h-full border-r p-4 bg-background z-99 transition-all duration-300 ${isSidebarOpen ? "left-0" : "-left-full"}`}>
+            <div><UserItem /></div>
+            <div className="grow">
+                <SidebarDesktop sidebarItems={sidebarItems} onLinkClick={handleLinkClick} />
+            </div>
         </div>
     );
 };

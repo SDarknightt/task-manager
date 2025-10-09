@@ -49,27 +49,22 @@ export default function Header({ isSidebarOpen, toggleSidebar }: HeaderProps) {
     }, [theme, filter])
 
     return (
-        <Menubar className="menu-header rounded-none px-2 border-l-0 border-r-0 border-t-0 border-b  lg:px-4 p-8">
+        <Menubar className="flex flex-row justify-between rounded-none px-2 border-b py-8 lg:px-4">
             <div className="flex justify-start">
-                <div className="flex flex-row self-center ml-2" onClick={() => router.push('/')}>
-                    <Image
-                        src="/assets/logo.svg"
-                        width={80}
-                        height={0}
-                        style={{filter: filter}}
-                        alt="Logo KanPlan"
-                        className="ml-3"
-                    />
-                </div>
-            </div>
-            <div className="flex justify-end align-end">
-                <button onClick={toggleSidebar} className="p-2 top-4 left-4 z-50">
-                    {isSidebarOpen ? (
-                        <PanelLeftClose className="transition-transform duration-300 transform rotate-180"/>
-                    ) : (
-                        <PanelLeftOpen className="transition-transform duration-300 transform rotate-0"/>
-                    )}
+                <button onClick={toggleSidebar}>
+                    <PanelLeftOpen size={30}/>
                 </button>
+            </div>
+            <div className="flex flex-row" onClick={() => router.push('/')}>
+                <Image
+                    src="/assets/logo.svg"
+                    width={80}
+                    height={0}
+                    style={{filter: filter}}
+                    alt="Logo Task Manager"
+                />
+            </div>
+            <div className="">
                 <DropdownHeaderItens/>
             </div>
         </Menubar>
@@ -99,14 +94,15 @@ function DropdownHeaderItens() {
     };
 
     const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
+        if (theme == "dark") setTheme("light");
+        if (theme == "light") setTheme("dark");
     };
 
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="outline"><MenuIcon/></Button>
+                <DropdownMenuTrigger className="p-0 m-0" asChild>
+                    <Button variant="ghost"><MenuIcon size={30}/></Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
                     <DropdownMenuLabel>Opções</DropdownMenuLabel>

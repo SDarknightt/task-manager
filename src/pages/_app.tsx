@@ -22,34 +22,30 @@ const MyApp: AppType<{ session: Session | null }> = ({
         setIsSidebarOpen(!isSidebarOpen);
     };
     return (
-      <SessionProvider session={session}>
-          <ThemeProvider attribute="class"
-                         defaultTheme="system"
-                         enableSystem
-          >
-              <AuthHandler>
-                  <Head>
-                      <title>Task Manager</title>
-                  </Head>
-                  <main className="main-container">
-                      <HeaderComponent isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
-
-                      <div className="flex flex-row justify-center">
-                          <div className="">
-                              <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
-                          </div>
-
-                          <div className="content-container bg-background text-foreground w-full sm:max-w-[80%]">
-                              <Component {...pageProps}/>
-                              <Toaster/>
-                          </div>
-                      </div>
-                      <Footer/>
-                  </main>
-              </AuthHandler>
-          </ThemeProvider>
-      </SessionProvider>
-  );
+        <SessionProvider session={session}>
+            <ThemeProvider attribute="class"
+                defaultTheme="light"
+                enableSystem
+            >
+                <AuthHandler>
+                    <Head>
+                        <title>Task Manager</title>
+                    </Head>
+                    <main className="flex flex-col min-h-screen bg-gray-300">
+                        <HeaderComponent isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
+                        <body className="flex flex-row justify-center flex-grow">
+                            <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
+                            <div className="content-container bg-background text-foreground w-full sm:max-w-[80%]">
+                                <Component {...pageProps}/>
+                                <Toaster/>
+                            </div>
+                        </body>
+                        <Footer/>
+                    </main>
+                </AuthHandler>
+            </ThemeProvider>
+        </SessionProvider>
+    );
 };
 
 export default api.withTRPC(MyApp);

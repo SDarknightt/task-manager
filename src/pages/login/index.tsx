@@ -58,11 +58,11 @@ export function SignInPage(){
                             Utilize a sua conta do Discord para entrar na aplicação.
                         </CardDescription>
                     </CardHeader>
-                    <CardContent>
+                    {/* <CardContent>
                         <Button className="mt-1 w-full" onClick={() => signIn('discord')}>
                             <FaDiscord className="mr-2"/> Entrar com Discord
                         </Button>
-                    </CardContent>
+                    </CardContent> */}
                     <CardContent>
                         <Button className="mt-1 w-full" onClick={() => signIn('google')}>
                             <FaGoogle className="mr-2"/> Entrar com Google
