@@ -104,6 +104,7 @@ npm install
 ```
 
 Configuração das Variáveis de Ambiente
+
 Altere o arquivo **.env.example** para **.env**
 
 Defina as seguintes variáveis:
