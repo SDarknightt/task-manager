@@ -1,29 +1,141 @@
-# Create T3 App
+# Task Manager - Sistema de Gerenciamento de Tarefas (Kanban)
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Projeto desenvolvido durante a graduação na disciplina de **Projeto Integrador** com o objetivo de aplicar conhecimentos em desenvolvimento web full stack, autenticação, modelagem de dados, desenvolvimento backend e frontend responsivo.
 
-## What's next? How do I make an app with this?
+A aplicação é um sistema de gerenciamento de tarefas colaborativo, onde usuários podem criar quadros kanban, gerenciar tarefas e acompanhar estatísticas de produtividade.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+---
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Funcionalidades
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- Login com Google utilizando OIDC (OpenID Connect) via NextAuth;
+- Criação de quadros Kanban;
+  - Adição de usuários ao quadro através de identificador único de 6 dígitos;
+  - Criação de tarefas vinculadas a um quadro;
+  - Vinculação e gerenciamento de tarefas entre os integrantes do quadro;
+  - Visualização do quadro em formato Kanban (Para Fazer, Fazendo, Feito);
+  - Aba de estatísticas com tarefas finalizadas (arquivadas);
+- Visão geral **"Minhas Tarefas"**, exibindo todas as tarefas vinculadas ao usuário em diferentes quadros.
 
-## Learn More
+---
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Conceitos Aplicados
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- **Next.js**  
+  - Estruturação da aplicação full stack com renderização híbrida.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- **NextAuth (OIDC com Google)**  
+  - Autenticação segura utilizando provedor externo;  
+  - Gerenciamento de sessão do usuário.
 
-## How do I deploy this?
+- **Prisma ORM**  
+  - Modelagem e manipulação do banco de dados;  
+  - Mapeamento objeto-relacional.
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- **tRPC**  
+  - Comunicação tipada entre frontend e backend.
+
+- **Tailwind CSS**  
+  - Estilização com abordagem utility-first.
+
+- **Arquitetura em Camadas**  
+  - Separação entre lógica de apresentação, regras de negócio e persistência de dados.
+
+- **Controle de Acesso**  
+  - Ações restritas a usuários autenticados;  
+  - Associação de tarefas e quadros a usuários específicos.
+
+---
+
+## Estrutura Funcional do Sistema
+
+### Quadros
+
+Cada usuário pode criar múltiplos quadros Kanban.  
+
+Os quadros possuem:
+- Nome;
+- Descrição;
+- Lista de membros vinculados.
+
+---
+
+### Tarefas
+
+Cada tarefa pertence a um quadro e contém:
+- Título;
+- Descrição;
+- Responsável;
+- Data limite;
+- Status (Para fazer, Fazendo ou Feito).
+
+Tarefas finalizadas são arquivadas e exibidas na aba de estatísticas do quadro.
+
+---
+
+### Identificador de Usuário
+
+Cada usuário possui um identificador numérico de 6 dígitos, gerado aleatoriamente em intervalos de tempo, utilizado para ser adicionado a novos quadros.
+
+---
+
+### Minhas Tarefas
+
+Visão consolidada que permite ao usuário visualizar todas as tarefas atribuídas a ele, independentemente do quadro ao qual pertençam.
+
+---
+
+## Como Executar o Projeto (Localmente)
+
+### Pré-requisitos
+
+- Node.js 18+
+- npm ou yarn
+- Banco de dados configurado (ex: PostgreSQL)
+
+---
+
+### Instalação
+
+Na raiz do projeto, execute:
+
+```bash
+npm install
+```
+
+Configuração das Variáveis de Ambiente
+Altere o arquivo **.env.example** para **.env**
+
+Defina as seguintes variáveis:
+```bash
+DATABASE_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=http://localhost:3000
+```
+
+Gerando o banco com base no schema:
+```bash
+npx prisma db push
+```
+
+Iniciando o projeto:
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em:
+```bash
+http://localhost:3000
+```
+
+### Melhorias Futuras
+- Implementação de notificações entre usuários;
+- Filtros avançados de tarefas e visualizações personalizadas;
+- Melhorias de responsividade das interfaces web;
+- Dashboard global com métricas de produtividade;
+- Dockerização da aplicação para facilitar deploy;
+- Gerenciamento de banco de dados com migrations do Prisma
+  - Atualmente é usado `prisma db push` para desenvolvimento rápido;  
+  - Futuras versões podem adotar `prisma migrate` para versionamento do schema, migrações seguras e histórico de alterações.
